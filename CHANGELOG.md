@@ -1,3 +1,6 @@
+## 1.0.1 / 2021-09-21
+* Update `oro-functions-client` to _v1.0.1_.
+
 ## 1.0.0 / 2021-08-23
 * Added _unit testing_ `Jest`.
 * Added `MIT License`.
