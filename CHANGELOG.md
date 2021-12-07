@@ -1,3 +1,6 @@
+## 1.0.2 / 2021-12-07
+* Update `oro-functions-client` to _v1.1.0_.
+
 ## 1.0.1 / 2021-09-21
 * Update `oro-functions-client` to _v1.0.1_.
 

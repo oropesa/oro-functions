@@ -1,6 +1,6 @@
 {
   "name": "oro-functions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Class Ofn extended from Ofn-Client with more helper static functions: URLs, Files, Operating System.",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "fast-glob": "^3.2.7",
     "find-free-port": "^2.0.0",
     "fs-extra": "^10.0.0",
-    "oro-functions-client": "^1.0.1",
+    "oro-functions-client": "^1.1.0",
     "zip-lib": "^0.7.2"
   },
   "devDependencies": {
