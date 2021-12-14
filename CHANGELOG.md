@@ -1,8 +1,12 @@
+## 1.0.3 / 2021-12-14
+* Updated lib `oro-functions-client` to _v1.2.0_.
+* Updated lib `jest` to _v27.4.5_.
+
 ## 1.0.2 / 2021-12-07
-* Update `oro-functions-client` to _v1.1.0_.
+* Updated lib `oro-functions-client` to _v1.1.0_.
 
 ## 1.0.1 / 2021-09-21
-* Update `oro-functions-client` to _v1.0.1_.
+* Updated lib `oro-functions-client` to _v1.0.1_.
 
 ## 1.0.0 / 2021-08-23
 * Added _unit testing_ `Jest`.
