@@ -6,6 +6,7 @@ Class `oro-functions` extended from `oro-functions-client`. If you want to know 
 
 Class Ofn with specific functions: 
 * [URLs](#urls)
+* [Crypto](#crypto)
 * [Files](#files)
 * [Operating System](#operating-system)
 * [Ports](#ports)
@@ -23,6 +24,22 @@ const Ofn = require( 'oro-functions' );
 
 ```js
 Ofn.jwkTokenDecode( token )
+```
+
+
+### Crypto
+
+```js
+//options = {
+//    type: 'rsa', // 'rsa', 'rsa-pss', 'dsa', 'ec', 'ed25519', 'ed448', 'x25519', 'x448', 'dh'.
+//    modulusLength: 4096,
+//    publicKeyEncodingType: 'spki', // 'pkcs1' (RSA only) or 'spki'.
+//    publicKeyEncodingFormat: 'pem', // 'pem', 'der', or 'jwk'.
+//    privateKeyEncodingType: 'pkcs8', // 'pkcs1' (RSA only), 'pkcs8' or 'sec1' (EC only).
+//    privateKeyEncodingFormat: 'pem', // 'pem', 'der', or 'jwk'.
+//    privateKeyEncodingCipher: 'aes-256-cbc', // 'aes-256-cbc', 'des-cbc-sha', 'rc4-128-md5', ...
+//}
+await Ofn.cryptoGenerateKeyPair( passphrase = '', options = {} )
 ```
 
 ### Files
