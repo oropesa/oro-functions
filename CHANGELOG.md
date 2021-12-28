@@ -1,3 +1,6 @@
+## 1.1.1 / 2021-12-28
+* Updated lib `oro-functions-client` to _v1.3.1_.
+
 ## 1.1.0 / 2021-12-17
 * Added _method_ `cryptoGenerateKeyPair` from `oro-functions-client` because it breaks in _front frameworks_ like `Vue`.
 
