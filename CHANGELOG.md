@@ -1,3 +1,6 @@
+## 1.1.4 / 2022-03-10
+* Updated lib `oro-functions-client` to _v1.3.4_.
+
 ## 1.1.3 & 1.1.2 / 2022-03-10
 * Updated lib `oro-functions-client` to _v1.3.2_.
 
