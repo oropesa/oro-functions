@@ -1,3 +1,7 @@
+## 1.1.6 / 2022-06-21
+* Updated lib `oro-functions-client` to `v1.3.6`.
+* Updated lib-dev `jest` to `v28.1.01`.
+
 ## 1.1.5 / 2022-05-25
 * Updated lib `fast-glob` to `v3.2.11`.
 * Updated lib `fs-extra` to `v10.1.0`.
