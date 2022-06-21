@@ -1,3 +1,6 @@
+## 1.1.7 / 2022-06-21
+* Updated lib `oro-functions-client` to `v1.3.7`.
+
 ## 1.1.6 / 2022-06-21
 * Updated lib `oro-functions-client` to `v1.3.6`.
 * Updated lib-dev `jest` to `v28.1.01`.
