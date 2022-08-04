@@ -17,12 +17,14 @@ describe('fn: obtainOroConfig', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfig( str )' , async () => {
         expect( await Ofn.obtainOroConfig( 'chacho' ) ).toEqual( {
             status: false,
             error: { msg: 'Ofn.obtainOroConfig args failed: must be an object.', args: 'chacho' }
         } );
     } );
+
     test( 'fn: obtainOroConfig( { file } } )' , async () => {
         let obtainingConfig = await Ofn.obtainOroConfig( { file: `${__dirname}/examples/prj1/oro-config.json` } );
 
@@ -37,6 +39,7 @@ describe('fn: obtainOroConfig', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfig( { file, deep 1 } )' , async () => {
         let obtainingConfig = await Ofn.obtainOroConfig( { file: `${__dirname}/examples/prj1/oro-config.json`, deep: 1 } );
 
@@ -49,6 +52,7 @@ describe('fn: obtainOroConfig', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfig( { file custom, deep 1, defaultParams } )' , async () => {
         let obtainingConfig = await Ofn.obtainOroConfig(
             { file: `${__dirname}/examples/prj1/custom-config.json`, deep: 1, defaultParams: [ 'environment' ] } );
@@ -61,6 +65,7 @@ describe('fn: obtainOroConfig', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfig( { file custom, deep 1, defaultParams none } )' , async () => {
         let obtainingConfig = await Ofn.obtainOroConfig(
             { file: `${__dirname}/examples/prj1/oro-config.json`, deep: 1, extraParams: [ 'custom' ] } );
@@ -94,12 +99,14 @@ describe('fn: obtainOroConfigSync', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfigSync( str )' , () => {
         expect( Ofn.obtainOroConfigSync( 'chacho' ) ).toEqual( {
             status: false,
             error: { msg: 'Ofn.obtainOroConfigSync args failed: must be an object.', args: 'chacho' }
         } );
     } );
+
     test( 'fn: obtainOroConfigSync( { file } } )' , () => {
         let obtainingConfig = Ofn.obtainOroConfigSync( { file: `${__dirname}/examples/prj1/oro-config.json` } );
 
@@ -114,6 +121,7 @@ describe('fn: obtainOroConfigSync', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfigSync( { file, deep 1 } )' , () => {
         let obtainingConfig = Ofn.obtainOroConfigSync( { file: `${__dirname}/examples/prj1/oro-config.json`, deep: 1 } );
 
@@ -126,6 +134,7 @@ describe('fn: obtainOroConfigSync', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfigSync( { file custom, deep 1, defaultParams } )' , () => {
         let obtainingConfig = Ofn.obtainOroConfigSync(
             { file: `${__dirname}/examples/prj1/custom-config.json`, deep: 1, defaultParams: [ 'environment' ] } );
@@ -138,6 +147,7 @@ describe('fn: obtainOroConfigSync', () => {
             }
         } );
     } );
+
     test( 'fn: obtainOroConfigSync( { file custom, deep 1, defaultParams none } )' , () => {
         let obtainingConfig = Ofn.obtainOroConfigSync(
             { file: `${__dirname}/examples/prj1/oro-config.json`, deep: 1, extraParams: [ 'custom' ] } );
@@ -159,17 +169,21 @@ describe('fn: getFileJsonRecursively', () => {
     test( 'fn: getFileJsonRecursively( undefined )' , async () => {
         expect( await Ofn.getFileJsonRecursively() ).toEqual( {} );
     } );
+
     test( 'fn: getFileJsonRecursively( not str )' , async () => {
         expect( await Ofn.getFileJsonRecursively( [] ) ).toEqual( {} );
     } );
+
     test( 'fn: getFileJsonRecursively( path )' , async () => {
         expect( await Ofn.getFileJsonRecursively( `${__dirname}/examples/prj1/custom-config.json` ) )
             .toEqual( { custom: { tio: true } } );
     } );
+
     test( 'fn: getFileJsonRecursively( path, deep bad )' , async () => {
         expect( await Ofn.getFileJsonRecursively( `${__dirname}/examples/prj1/custom-config.json`, true ) )
             .toEqual( { custom: { tio: true } } );
     } );
+
     test( 'fn: getFileJsonRecursively( path, deep )' , async () => {
         expect( await Ofn.getFileJsonRecursively( `${__dirname}/examples/prj1/custom-config.json`, 2 ) )
             .toEqual( { environment: 'DEV', custom: { chacho: true, tio: true } } );

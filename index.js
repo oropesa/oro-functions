@@ -1,10 +1,9 @@
-const net = require( 'net' );
 const zip = require( 'zip-lib' );
 const crypto = require( 'crypto' );
 const fglob = require( 'fast-glob' );
 const fsExtra = require( 'fs-extra' );
-const findPort = require( 'find-free-port' );
 const OfnClient = require( 'oro-functions-client' );
+const { getPort, checkPort } = require( 'get-port-please' );
 
 global.atob = require( 'atob' );
 
@@ -57,7 +56,7 @@ class Ofn extends OfnClient {
 
                 return resolve( Ofn.setResponseOK( { passphrase, publicKey, privateKey } ) );
             } ) )
-            .catch( err => Ofn.setResponseKO( err.toString() , { err } ) );
+            .catch( err => Ofn.setResponseKO( err.toString(), { err } ) );
     }
 
     //endregion
@@ -86,8 +85,10 @@ class Ofn extends OfnClient {
 
         for( const param of params ) {
             if( ! config[ param ] ) {
-                return Ofn.setResponseKO( `Miss param:${param} on ${filepath}/${filename} deep ${deep}`,
-                    { file, deep, defaultParams, extraParams } );
+                return Ofn.setResponseKO(
+                    `Miss param:${param} on ${filepath}/${filename} deep ${deep}`,
+                    { file, deep, defaultParams, extraParams }
+                );
             }
         }
 
@@ -117,8 +118,10 @@ class Ofn extends OfnClient {
 
         for( const param of params ) {
             if( ! config[ param ] ) {
-                return Ofn.setResponseKO( `Miss param:${param} on ${filepath}/${filename} deep ${deep}`,
-                    { file, deep, defaultParams, extraParams } );
+                return Ofn.setResponseKO(
+                    `Miss param:${param} on ${filepath}/${filename} deep ${deep}`,
+                    { file, deep, defaultParams, extraParams }
+                );
             }
         }
 
@@ -137,11 +140,11 @@ class Ofn extends OfnClient {
         do {
             folder = Ofn.getFolderByPath( folder )
             const jsonFile = await fsExtra.readJson( `${folder}/${filename}` ).catch( e => {} );
-            if( jsonFile ) {
-                jsonOutput = Ofn.mergeObjectsDeep( jsonFile, jsonOutput );
-            }
+            if( jsonFile ) { jsonOutput = Ofn.mergeObjectsDeep( jsonFile, jsonOutput ); }
+
             parentDeep--;
-        } while( parentDeep >= 0 )
+        }
+        while( parentDeep >= 0 );
 
         return jsonOutput;
     }
@@ -164,7 +167,8 @@ class Ofn extends OfnClient {
             catch( e ) {}
 
             parentDeep--;
-        } while( parentDeep >= 0 )
+        }
+        while( parentDeep >= 0 );
 
         return jsonOutput;
     }
@@ -180,16 +184,9 @@ class Ofn extends OfnClient {
             ignore: [ "node_modules/**", ".zero/**" ]
         }, globArgs );
 
-        folderPath = Ofn.isString( folderPath ) ?
-                        Ofn.sanitizePath( folderPath ) : folderPath.map( path => Ofn.sanitizePath( path ) );
+        folderPath = Ofn.isString( folderPath ) ? Ofn.sanitizePath( folderPath ) : folderPath.map( path => Ofn.sanitizePath( path ) );
 
         return fglob( folderPath, args );
-    }
-
-    static async pathIsFolder( path ) {
-        if( ! Ofn.isString( path ) ) { return false; }
-
-        return await fsExtra.exists( path ) && fsExtra.statSync( path ).isDirectory();
     }
 
     static async folderIsEmpty( folderPath, globArgs = {} ) {
@@ -208,6 +205,12 @@ class Ofn extends OfnClient {
         return ! ( await Ofn.globFiles( folderPath, args ) ).length;
     }
 
+    static async pathIsFolder( path ) {
+        if( ! Ofn.isString( path ) ) { return false; }
+
+        return await fsExtra.exists( path ) && fsExtra.statSync( path ).isDirectory();
+    }
+
     static async zipFolder( folderPath, zipPath ) {
         if( ! Ofn.isString( folderPath ) ) {
             return Ofn.setResponseKO( 'Ofn.zipFolder failed, param:folderPath is string required.' );
@@ -216,8 +219,8 @@ class Ofn extends OfnClient {
         folderPath = Ofn.sanitizePath( folderPath );
 
         if( Ofn.isNully( zipPath ) ) {
-            zipPath = `${folderPath.substr( -1 ) === '/' ? 
-                         folderPath.substr( 0, folderPath.length - 1 ) : folderPath}.zip`
+            zipPath = `${folderPath.substr( -1 ) === '/' 
+                         ? folderPath.substr( 0, folderPath.length - 1 ) : folderPath}.zip`
         }
 
         if( ! Ofn.isString( zipPath ) ) {
@@ -238,21 +241,23 @@ class Ofn extends OfnClient {
                     `Ofn.zipFolder Error: Source and target folder must be different.`, { folderPath, zipPath } )
             }
 
-            let response = await zip.archiveFolder( folderPath, zipPath ).then( () => Ofn.setResponseOK() )
-                                    .catch( e => Ofn.setResponseKO(
-                                        `Ofn.zipFolder ${e.toString()}`, { folderPath, zipPath } ) );
+            let response = await zip.archiveFolder( folderPath, zipPath )
+                .then( () => Ofn.setResponseOK() )
+                .catch( e => Ofn.setResponseKO( `Ofn.zipFolder ${e.toString()}`, { folderPath, zipPath } ) );
+
             if( ! response.status ) { return response; }
         }
         else {
-            let response = await zip.archiveFile( folderPath, zipPath ).then( () => Ofn.setResponseOK() )
-                                    .catch( e => Ofn.setResponseKO(
-                                        `Ofn.zipFolder ${e.toString()}`, { folderPath, zipPath } ) );
+            let response = await zip.archiveFile( folderPath, zipPath )
+                .then( () => Ofn.setResponseOK() )
+                .catch( e => Ofn.setResponseKO( `Ofn.zipFolder ${e.toString()}`, { folderPath, zipPath } ) );
+
             if( ! response.status ) { return response; }
         }
 
-        return await fsExtra.exists( zipPath ) ?
-               Ofn.setResponseOK( { zipPath } ) :
-               Ofn.setResponseKO( 'File zip not exists (maybe for permissions issue).' );
+        return await fsExtra.exists( zipPath )
+               ? Ofn.setResponseOK( { zipPath } )
+               : Ofn.setResponseKO( 'File zip not exists (maybe for permissions issue).' );
     }
 
     //endregion
@@ -268,27 +273,78 @@ class Ofn extends OfnClient {
 
     static async isPortAvailable( port ) {
         if( ! Ofn.isNumeric( port ) ) { return Ofn.setResponseKO( `Unrecognize port`, { port } ); }
+        ! Ofn.isNumber( port ) && ( port = +port );
 
-        return new Promise( ( resolve, reject ) => {
-            const socket = net.connect( port );
-            socket.on( 'connect', () => {
-                socket.destroy(); resolve( Ofn.setResponseKO( 'Port already in use.' ) ); } );
-            socket.on( 'error', err => {
-                socket.destroy();
-                return err.code === 'ECONNREFUSED' ?
-                       resolve( Ofn.setResponseOK( { port } ) ) :
-                       Ofn.setResponseKO( `Unrecognize error  ${err.code}`, { err } );
-            } );
-        } );
+        return await checkPort( port )
+            .then( result => result
+                           ? Ofn.setResponseOK( { port: result } )
+                           : Ofn.setResponseKO( `Port already in use: ${port}.`, { port }
+            ) );
     }
 
-    static async getPortFree( portStart = 3000, portEnd = 65535 ) {
-        if( ! Ofn.isNumberic( portStart ) ) { return Ofn.setResponseKO( `param:portStart must be a number.` ) }
-        if( ! Ofn.isNumberic( portEnd ) ) { return Ofn.setResponseKO( `param:portEnd must be a number.` ) }
+    static async getPortFree( portStart = null, portEnd = null ) {
+        let opts = { random: true };
 
-        return await findPort( +portStart, +portEnd )
-            .then( arr => { return Ofn.setResponseOK( { port: arr[ 0 ] } ) } )
-            .catch( err => { return Ofn.setResponseKO( `No available ports in range ${portStart}-${portEnd}` ); } );
+        if( ! Ofn.isNull( portEnd ) ) {
+            if( ! Ofn.isNumberic( portEnd ) ) {
+                return Ofn.setResponseKO( `param:portEnd must be a number.` );
+            }
+
+            if( ! Ofn.isNumberic( portStart ) ) {
+                return Ofn.setResponseKO( `param:portStart must be a number when portEnd is enabled.` );
+            }
+
+            portStart > portEnd && ( [ portStart, portEnd ] = [ portEnd, portStart ] );
+
+            opts.random = false;
+            opts.port = portStart;
+            opts.portRange = [ portStart, portEnd ];
+        }
+
+        if( ! Ofn.isNull( portStart ) ) {
+            if( Ofn.isArray( portStart ) ) {
+                if( ! portStart.length ) { return Ofn.setResponseKO( `param:portStart Array must have numbers.` ); }
+
+                for( const arrPort of portStart ) {
+                    if( ! Ofn.isNumberic( arrPort ) ) {
+                        return Ofn.setResponseKO( `param:portStart Array must have only numbers, not: ${arrPort}`, { portStart } );
+                    }
+                }
+            }
+            else if( ! Ofn.isNumberic( portStart ) ) {
+                return Ofn.setResponseKO( `param:portStart must be a number.` );
+            }
+
+            //
+
+            opts.random = false;
+
+            if( Ofn.isArray( portStart ) ) {
+                opts.port = portStart[ 0 ];
+                opts.ports = portStart;
+            }
+            else {
+                opts.port = portStart
+            }
+        }
+
+        let response = await getPort( opts )
+            .then( port => { return Ofn.setResponseOK( { port } ) } )
+            .catch( err => { return Ofn.setResponseKO( `No available ports`, { err } ); } );
+
+        if( ! response.status ) { return response; }
+
+        if( opts.ports && opts.ports.length && ! opts.ports.includes( response.port ) ) {
+            return Ofn.setResponseKO(
+                `No available ports in array [ ${opts.ports.join( ', ' )} ]`, { port: response.port, opts } );
+        }
+
+        if( opts.portRange && opts.portRange.length && ! ( opts.portRange[ 0 ] <= response.port && opts.portRange[ 1 ] >= response.port ) ) {
+            return Ofn.setResponseKO(
+                `No available ports in range ${opts.portRange.join( '-' )}`, { port: response.port, opts } );
+        }
+
+        return response;
     }
 
     //endregion
@@ -301,16 +357,16 @@ class Ofn extends OfnClient {
 
         let config = { string: '', color: '', background: '' };
         if( Ofn.isObject( strOrObject ) ) {
-            strOrObject.s !== undefined && ( config.string = strOrObject.s );
-            strOrObject.str !== undefined && ( config.string = strOrObject.str );
+            strOrObject.s !== undefined      && ( config.string = strOrObject.s );
+            strOrObject.str !== undefined    && ( config.string = strOrObject.str );
             strOrObject.string !== undefined && ( config.string = strOrObject.string )
 
-            strOrObject.c !== undefined && ( config.color = strOrObject.c );
-            strOrObject.cl !== undefined && ( config.color = strOrObject.cl );
+            strOrObject.c !== undefined     && ( config.color = strOrObject.c );
+            strOrObject.cl !== undefined    && ( config.color = strOrObject.cl );
             strOrObject.color !== undefined && ( config.color = strOrObject.color );
 
-            strOrObject.b !== undefined && ( config.background = strOrObject.b );
-            strOrObject.bg !== undefined && ( config.background = strOrObject.bg );
+            strOrObject.b !== undefined          && ( config.background = strOrObject.b );
+            strOrObject.bg !== undefined         && ( config.background = strOrObject.bg );
             strOrObject.background !== undefined && ( config.background = strOrObject.background );
         }
         else {

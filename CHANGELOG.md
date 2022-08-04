@@ -1,3 +1,10 @@
+## 1.2.0 / 2022-08-04
+* Updated _Readme_ and `tests/`.
+* Added `package-lock.json`.
+* Changed lib `find-free-port` to `get-port-please`.
+* Updated lib `oro-functions-client` to `v1.4.0`.
+* Updated lib-dev `jest` to `v28.1.3`.
+
 ## 1.1.7 / 2022-06-21
 * Updated lib `oro-functions-client` to `v1.3.7`.
 
