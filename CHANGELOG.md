@@ -1,3 +1,6 @@
+## 1.2.1 / 2022-08-16
+* Updated lib `oro-functions-client` to `v1.4.1`.
+
 ## 1.2.0 / 2022-08-04
 * Updated _Readme_ and `tests/`.
 * Added `package-lock.json`.
