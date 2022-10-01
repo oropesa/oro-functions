@@ -23,7 +23,7 @@
   "homepage": "https://github.com/oropesa/oro-functions#readme",
   "dependencies": {
     "atob": "^2.1.2",
-    "fast-glob": "^3.2.11",
+    "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
     "get-port-please": "^2.5.0",
     "oro-functions-client": "^1.4.1",
