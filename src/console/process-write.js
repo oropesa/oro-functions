@@ -1,7 +1,7 @@
-import {
+const {
     isObject,
     isArray,
-} from 'oro-functions-client/src'
+} = require( 'oro-functions-client/src' );
 
 const COLORS = { 'gray': 90, 'red': 91, 'green': 92, 'white': 93, 'yellow': 93, 'blue': 94, 'redlight': 95, 'bluelight': 96 };
 const BGS = { 'gray': 100, 'red': 101, 'green': 102, 'white': 103, 'yellow': 103, 'blue': 104, 'redlight': 105, 'bluelight': 106 };

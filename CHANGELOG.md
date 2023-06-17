@@ -1,3 +1,6 @@
+## 1.3.1 / 2023-06-17
+* Fixed bad declared `import` from `process-write`.
+
 ## 1.3.0 / 2023-06-17
 * Added `TS` support.
 * Added _ts tests_.
