@@ -1,3 +1,18 @@
+## 1.3.0 / 2023-06-17
+* Added `TS` support.
+* Added _ts tests_.
+* Improved _tests_.
+* Improved _readme_.
+* Updated lib `fast-glob` to `v3.2.12`.
+* Updated lib `fs-extra` to `v11.1.1`.
+* Updated lib `get-port-please` to `v3.0.1`.
+* Updated lib `oro-functions-client` to `v1.5.4`.
+* Updated lib-dev `jest` to `v29.5.0`.
+* Renamed fns `obtainOConfig`, `obtainOConfigSync`, `isPortFree` 
+    and deprecated `obtainOroConfig`, `obtainOroConfigSync`, `isPortAvailable`.
+* Allow to get functions individually in `/src`:
+    * `const { fn1, fn2, ... } = require( 'oro-functions/src' )` (including 'oro-functions-client') 
+
 ## 1.2.1 / 2022-08-16
 * Updated lib `oro-functions-client` to `v1.4.1`.
 

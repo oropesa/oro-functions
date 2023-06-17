@@ -1,0 +1,1 @@
+export type pathIsFolder = ( folderPath: string ) => Promise<boolean>;

@@ -8,20 +8,20 @@
   * [Extended Functions](#extended-functions)
     
     * [URLs](#urls)
-      * [Ofn.jwkTokenDecode( token )](#ofnjwktokendecode-token-)
+      * [Ofn.jwkTokenDecode()](#ofnjwktokendecode)
        
     * [Crypto](#crypto)
-      * [Ofn.cryptoGenerateKeyPair( passphrase = '', options = {} )](#ofncryptogeneratekeypair-passphrase---options---)
+      * [Ofn.cryptoGenerateKeyPair()](#ofncryptogeneratekeypair)
     
     * [Files](#files)
-      * [await Ofn.obtainOroConfig( args )](#await-ofnobtainoroconfig-args-)
-      * [Ofn.obtainOroConfigSync( args )](#ofnobtainoroconfigsync-args-)
-      * [await Ofn.getFileJsonRecursively( filenameOrPath, parentDeep = 0 )](#await-ofngetfilejsonrecursively-filenameorpath-parentdeep--0-)
-      * [Ofn.getFileJsonRecursivelySync( filenameOrPath, parentDeep = 0 )](#ofngetfilejsonrecursivelysync-filenameorpath-parentdeep--0-)
-      * [await Ofn.globFiles( folderPath, globArgs = {} )](#await-ofnglobfiles-folderpath-globargs---)
-      * [await Ofn.folderIsEmpty( folderPath, globArgs = {} )](#await-ofnfolderisempty-folderpath-globargs---)
-      * [await Ofn.pathIsFolder( path )](#await-ofnpathisfolder-path-)
-      * [await Ofn.zipFolder( folderPath, zipPath, compressionLevel = undefined )](#await-ofnzipfolder-folderpath-zippath-compressionlevel--undefined-)
+      * [await Ofn.obtainOConfig()](#await-ofnobtainoroconfig)
+      * [Ofn.obtainOConfigSync()](#ofnobtainoroconfigsync)
+      * [await Ofn.getFileJsonRecursively()](#await-ofngetfilejsonrecursively)
+      * [Ofn.getFileJsonRecursivelySync()](#ofngetfilejsonrecursivelysync)
+      * [await Ofn.globFiles()](#await-ofnglobfiles)
+      * [await Ofn.folderIsEmpty()](#await-ofnfolderisempty)
+      * [await Ofn.pathIsFolder()](#await-ofnpathisfolder)
+      * [await Ofn.zipFolder()](#await-ofnzipfolder)
     
     * [Operating System](#operating-system)
       * [Ofn.osPlatform()](#ofnosplatform)
@@ -30,12 +30,12 @@
       * [Ofn.osIsLinux()](#ofnosislinux)
     
     * [Ports](#ports)
-      * [await Ofn.isPortAvailable( port )](#await-ofnisportavailable-port-)
-      * [await Ofn.getPortFree( portStart = null, portEnd = null )](#await-ofngetportfree-portstart--null-portend--null-)
+      * [await Ofn.isPortFree()](#await-ofnisportfree)
+      * [await Ofn.getPortFree()](#await-ofngetportfree)
     
     * [Console](#console)
-      * [Ofn.processWrite( strOrObject, color = '', bg = '' )](#ofnprocesswrite-strorobject-color---bg---)
-      * [Ofn.processWrites( arr )](#ofnprocesswrites-arr-)
+      * [Ofn.processWrite()](#ofnprocesswrite)
+      * [Ofn.processWrites()](#ofnprocesswrites)
 
 ## Overview
 
@@ -43,7 +43,7 @@ By default, **Ofn**, it's a simple class with helper static functions.
 
 This package ( `oro-functions` ) is divided from `oro-functions-client` to allow using that functions in _js-client frameworks_ like `Vuejs`.
 
-Class `oro-functions` extended from `oro-functions-client`. If you want to know all fns, read **[oro-functions-client](https://github.com/oropesa/oro-functions-client/)**.
+Class `oro-functions` is extended from `oro-functions-client`. If you want to know all fns, read **[oro-functions-client](https://github.com/oropesa/oro-functions-client/)**.
 
 ## Installation
 
@@ -55,6 +55,9 @@ npm install oro-functions
 ```js
 const Ofn = require( 'oro-functions' );
 
+// ts
+import Ofn from 'oro-functions';
+
 Ofn.type( [ 1, 2, 3 ] );
 // 'array'
 ```
@@ -65,7 +68,7 @@ Ofn.type( [ 1, 2, 3 ] );
 
 ### Oro Functions Client
 
-In **Ofn** there are allowed all _functions_ of [Oro Functions Client](https://github.com/oropesa/oro-functions-client).
+In **Ofn** there are all _functions_ of [Oro Functions Client](https://github.com/oropesa/oro-functions-client).
 
 <hr>
 
@@ -75,22 +78,56 @@ In **Ofn** there are allowed all _functions_ of [Oro Functions Client](https://g
 
 <hr>
 
-#### Ofn.jwkTokenDecode( token )
+#### Ofn.jwkTokenDecode()
+```ts
+jwkTokenDecode( token: string ) => string;
+```
 
 ```js
 Ofn.jwkTokenDecode( 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoib3JvcGVzYSIsImlhdCI6MTYyOTcxMzM2MywiZXhwIjoxNjI5NzIwNTYzfQ.2zL8FzvFQCtuqi0fFoby4QVCXSi2pWNS3bzCU53Vd4M' );
-// '{"user":"oropesa","iat":1629713363,"exp":1629720563}'
+// -> '{"user":"oropesa","iat":1629713363,"exp":1629720563}'
 ```
 
 ### Crypto
 
 <hr>
 
-#### Ofn.cryptoGenerateKeyPair( passphrase = '', options = {} )
+#### Ofn.cryptoGenerateKeyPair()
+```ts
+Ofn.cryptoGenerateKeyPair(
+  passphrase?: string,
+  options?: CryptoKeyPairOptions
+) => Promise<CryptoKeyPairResponse>
+
+interface CryptoKeyPairOptions {
+  type?: string;
+  modulusLength?: number;
+  publicKeyEncodingType?: string;
+  publicKeyEncodingFormat?: string;
+  privateKeyEncodingType?: string;
+  privateKeyEncodingFormat?: string;
+  privateKeyEncodingCipher?: string;
+}
+
+type CryptoKeyPairResponse = SResponse<CryptoKeyPairObject, CryptoKeyPairError>;
+
+interface CryptoKeyPairObject {
+  passphrase: string;
+  publicKey: string;
+  privateKey: string;
+}
+
+interface CryptoKeyPairError {
+  msg: string;
+  err: Error;
+}
+
+```
 
 ```js
-await Ofn.cryptoGenerateKeyPair( passphrase = '', options = {} )
+await Ofn.cryptoGenerateKeyPair( 'example' )
 // {
+//   passphrase: 'example',
 //   publicKey: '-----BEGIN RSA PUBLIC KEY-----',
 //   privateKey: '-----BEGIN RSA PRIVATE KEY-----'
 // }
@@ -113,12 +150,45 @@ options = {
 
 <hr>
 
-#### await Ofn.obtainOroConfig( args )
-#### Ofn.obtainOroConfigSync( args )
+#### await Ofn.obtainOConfig()
+#### Ofn.obtainOConfigSync()
+```ts
+await Ofn.obtainOConfig<T extends object = OConfigDefaultParams>
+    ( args?: OConfigArgs ) => Promise<OConfigResponse<T>>;
 
-Put yourself in this situation, you work with _Git_ and you create a _modules_ or _projects_ 
-that need the common file `.env` to use _custom variables_, 
-with data to, i.e., connect in _dbs_, _users-passwords_, _dev-pro_ or other _envs_, _custom configs_.
+Ofn.obtainOConfigSync<T extends object = OConfigDefaultParams>
+    ( args?: OConfigArgs ) => OConfigResponse<T>;
+
+interface OConfigArgs {
+  file?: string;
+  deep?: number;
+  defaultParams?: string[];
+  extraParams?: string[];
+}
+
+interface OConfigDefaultParams {
+  environment: string;
+  projectname: string;
+  projectserver: string;
+}
+
+type OConfigResponse<T extends object = OConfigDefaultParams> = 
+    SResponse<OConfigObject<T>, OConfigError>;
+
+interface OConfigObject<T extends object = OConfigDefaultParams> {
+  config: T;
+}
+
+interface OConfigError {
+  msg: string;
+  args?: OConfigArgs;
+}
+
+```
+
+Put yourself in this situation, you work with _Git_ and you create _modules_ or _projects_ 
+that need the common file `.env` to use _custom variables_, with data about, i.e., 
+connect to _dbs_, _users-passwords_, _dev-pro_ or other _envs_, _custom configs_.
 
 Then, you have something like:
 
@@ -134,8 +204,8 @@ Then, you have something like:
 Instead of create _global variables_ in the system, or duplicate the file `.env`, you can centralize 
 all data in `oro-config.json`.
 
-This file, `oro-config.json`, could be in the same project and in the parents folders too, 
-in such a way that the _final json_ is merged and overwritten from the parents to the project.
+This file, `oro-config.json`, could be in the same project and in the parent folders too, 
+in such a way that the _final json_ is merged and overwritten from the parent folders to the project.
 
 So, using this example, you have:
 
@@ -147,7 +217,7 @@ So, using this example, you have:
   ├─ project-2/
   │   ├─ oro-config.json #json of project 2
   │   └...
-  ├─ oro-config.json #son of parent-folder (w/o git)
+  ├─ oro-config.json #json of parent-folder
   └...
 ````
 
@@ -179,12 +249,12 @@ Continuing, the `oro-config.json` files have the next data:
 }
 ````
 
-Finally, the result is:
+Finally, the `json` result is:
 
 ```js
-/* Inside the project 1 */
+/* Inside project 1 */
 
-let obtainConfig = await Ofn.obtainOroConfig( { deep: 1 } );
+let obtainConfig = await Ofn.obtainOConfig( { deep: 1 } );
 // {
 //   status: true,
 //   config: {
@@ -198,9 +268,9 @@ let obtainConfig = await Ofn.obtainOroConfig( { deep: 1 } );
 //   }
 // }
 
-/* Inside the project 2 */
+/* Inside project 2 */
 
-let obtainConfig = await Ofn.obtainOroConfig( { deep: 1 } );
+let obtainConfig = await Ofn.obtainOConfig( { deep: 1 } );
 // {
 //   status: true,
 //   config: {
@@ -227,20 +297,27 @@ let args = {
 }
 ```
 
-By default, there are 3 _params_ that are required in the _json_: `environment`, `projectname`, `projectserver`.
+By default, there are 3 _params_ that are required in _json_: `environment`, `projectname`, `projectserver`.
 
-So, if there are missing, the _response_ of `Ofn.obtainOroConfig()` is `{ status: false, ... }`.
+So, if there are missing, the _response_ of `Ofn.obtainOConfig()` is `{ status: false, ... }`.
 
-For one have, you can change the `defaultParams`, or you can add `extraParams` to be required.
+Alternatively, you can change `defaultParams`, or you can add `extraParams` to be required.
 
-For other hand, you can change de `file` name to search, so instead of `oro-config.json`, you can use `custom.json`.
+On the other hand, you can change de `file` name to search, so instead of `oro-config.json`, you can use `custom.json`.
 
 Finally, you choose the `deep` from parents to look for.
 
 <hr>
 
-#### await Ofn.getFileJsonRecursively( filenameOrPath, parentDeep = 0 )
-#### Ofn.getFileJsonRecursivelySync( filenameOrPath, parentDeep = 0 )
+#### await Ofn.getFileJsonRecursively()
+#### Ofn.getFileJsonRecursivelySync()
+```ts
+await Ofn.getFileJsonRecursively<T>
+    ( filenameOrPath: string, parentDeep?: number ) => Promise<T>;
+
+Ofn.getFileJsonRecursivelySync<T>
+    ( filenameOrPath: string, parentDeep?: number ) => T;
+```
 
 Having this case:
 
@@ -254,7 +331,7 @@ Having this case:
   └ custom.json 
 ````
 
-The _final json_ is merged and overwritten from the parents to the project.
+The _final json_ is merged and overwritten from the parents to the project file.
 
 ```js
 // in index.js
@@ -264,7 +341,13 @@ let custom = await Ofn.getFileJsonRecursively( 'custom.json', 2 );
 
 <hr>
 
-#### await Ofn.globFiles( folderPath, globArgs = {} )
+#### await Ofn.globFiles()
+```ts
+await Ofn.globFiles = (
+  folderPath: string | string[],
+  globArgs?: GlobFilesOptions,
+) => Promise<string[]>;
+```
 
 ```js
 await Ofn.globFiles( `folder/*` );
@@ -275,12 +358,12 @@ await Ofn.globFiles( `folder/*` );
 ```
 
 * **Default args**
-  
-`Ofn.globFiles` is a wrapper of the lib [fast-glob](https://www.npmjs.com/package/fast-glob) with _default args_.
-
-You can read how it works to update `globArgs`.
+* 
+This function is a wrapper of [fast-glob](https://www.npmjs.com/package/fast-glob) with _default args_.
+so `GlobFilesOptions` are the same as [fast-glob Options](https://www.npmjs.com/package/fast-glob#options-3)
 
 ```js
+// default
 globArgs = {
     dot: true,
     unique: true,
@@ -291,19 +374,25 @@ globArgs = {
 
 <hr>
 
-#### await Ofn.folderIsEmpty( folderPath, globArgs = {} )
+#### await Ofn.folderIsEmpty()
+```ts
+await Ofn.folderIsEmpty = (
+  folderPath: string,
+  globArgs?: GlobFilesOptions,
+) => Promise<boolean>;
+```
 
 ```js
 await Ofn.folderIsEmpty( `folder/` ); // false
 ```
 
-`Ofn.folderIsEmpty` uses the lib [fast-glob](https://www.npmjs.com/package/fast-glob) with _default args_.
-
-You can read how it works to update `globArgs`.
-
 * **Default args**
 
+This function is a wrapper of [fast-glob](https://www.npmjs.com/package/fast-glob) with _default args_.
+so `GlobFilesOptions` are the same as [fast-glob Options](https://www.npmjs.com/package/fast-glob#options-3)
+
 ```js
+// default
 globArgs = {
     dot: true,
     unique: true,
@@ -314,19 +403,38 @@ globArgs = {
 
 <hr>
 
-#### await Ofn.pathIsFolder( path )
+#### await Ofn.pathIsFolder()
+```ts
+await Ofn.pathIsFolder = ( folderPath: string ) => Promise<boolean>;
+```
 
 ```js
-await Ofn.pathIsFolder( `folder` ); // true
+await Ofn.pathIsFolder( `folder` ); 
+// -> true
 ```
 
 <hr>
 
-#### await Ofn.zipFolder( folderPath, zipPath, compressionLevel = undefined )
+#### await Ofn.zipFolder()
+```ts
+await Ofn.zipFolder = ( folderPath: string, zipPath?: string ) => Promise<ZipFolderResponse>;
+
+type ZipFolderResponse = SResponse<ZipFolderObject, ZipFolderError>;
+
+interface ZipFolderObject {
+  zipPath: string;
+}
+
+interface ZipFolderError {
+  msg: string;
+  folderPath?: string;
+  zipPath?: string;
+}
+```
 
 ```js
 await Ofn.zipFolder( `folder`, 'folder.zip' ); 
-// { status: true, zipPath: 'folder.zip' }
+// -> { status: true, zipPath: 'folder.zip' }
 ```
 
 <hr>
@@ -334,71 +442,135 @@ await Ofn.zipFolder( `folder`, 'folder.zip' );
 ### Operating System
 
 #### Ofn.osPlatform()
+```ts
+Ofn.osPlatform = () => NodeJS.Platform;
+```
 
 ```js
-Ofn.osPlatform(); // 'win32' || 'darwin' || 'linux'
+Ofn.osPlatform(); 
+// -> 'win32' || 'darwin' || 'linux' || ...
 ```
 
 <hr>
 
 #### Ofn.osIsWindows()
+```ts
+Ofn.osIsWindows = () => boolean;
+```
 
 ```js
-Ofn.osIsWindows(); // true
+Ofn.osIsWindows();
+// -> true
 ```
 
 <hr>
 
 #### Ofn.osIsMac()
+```ts
+Ofn.osIsMac = () => boolean;
+```
 
 ```js
-Ofn.osIsMac(); // false
+Ofn.osIsMac();
+// -> false
 ```
 
 <hr>
 
 #### Ofn.osIsLinux()
+```ts
+Ofn.osIsLinux = () => boolean;
+```
 
 ```js
-Ofn.osIsLinux(); // true
+Ofn.osIsLinux();
+// -> true
 ```
 
 ### Ports
 
 <hr>
 
-#### await Ofn.isPortAvailable( port )
+#### await Ofn.isPortFree()
+```ts
+await Ofn.isPortFree = ( port: number ) => Promise<IsPortFreeResponse>;
+
+type IsPortFreeResponse = SResponse<PortFreeObject, IsPortFreeError>;
+
+interface PortFreeObject {
+  port: number;
+}
+
+interface IsPortFreeError {
+  msg: string;
+  port: number;
+}
+```
 
 ```js
-await Ofn.isPortAvailable( 3000 ); 
-// { status: true, port: 3000 }
+await Ofn.isPortFree( 3000 ); 
+// -> { status: true, port: 3000 }
 ```
 
 <hr>
 
-#### await Ofn.getPortFree( portStart = null, portEnd = null )
+#### await Ofn.getPortFree()
+```ts
+await Ofn.getPortFree = ( portStart?: number | number[], portEnd?: number ) 
+    => Promise<GetPortFreeResponse>;
+
+type GetPortFreeResponse = SResponse<PortFreeObject, GetPortFreeError>;
+
+interface PortFreeObject {
+  port: number;
+}
+
+interface GetPortFreeError {
+  msg: string;
+  port?: number;
+  opts?: {
+    random?: boolean;
+    port?: number;
+    ports?: number[];
+    portRange?: number[];
+  };
+  err?: any;
+}
+```
 
 ```js
 await Ofn.getPortFree(); 
-// { status: true, port: 60247 } #random
+// -> { status: true, port: 60247 } #random
 
 await Ofn.getPortFree( 3000 ); 
-// { status: true, port: 3000 } #if not allowed, return random
+// -> { status: true, port: 3000 } #if not allowed, return random
 
 await Ofn.getPortFree( [ 3000, 3001, 3002 ] ); 
-// { status: true, port: 3000 }
-// { status: false, error: { msg: 'No available ports in array [ 3000, 3001, 3002 ]' } }
+// -> { status: true, port: 3000 }
+// -> { status: false, error: { msg: 'No available ports in array [ 3000, 3001, 3002 ]' } }
 
 await Ofn.getPortFree( 3000, 3100 ); 
-// { status: true, port: 3000 }
-// { status: false, error: { msg: 'No available ports in range 3000-3100' } }
+// -> { status: true, port: 3000 }
+// -> { status: false, error: { msg: 'No available ports in range 3000-3100' } }
 ```
 
 ### Console
 
 <hr>
 
-#### Ofn.processWrite( strOrObject, color = '', bg = '' )
+#### Ofn.processWrite()
+```js
+Ofn.processWrite(
+  strOrObject: string | ProcessWriteObject,
+  color?: string,
+  bg?: string
+) => string;
+
+type ProcessWriteObject =
+    | { s?: string, c?: string, b?: string }
+    | { str?: string, cl?: string, bg?: string }
+    | { string?: string, color?: string, background?: string }
+```
 
 ```js
 Ofn.processWrite( 'info', 'blue' );
@@ -432,7 +604,15 @@ Note: first param could be a `string` or an `object`
 
 <hr>
 
-#### Ofn.processWrites( arr )
+#### Ofn.processWrites()
+```js
+Ofn.processWrites( arr: Array<string | ProcessWriteObject> ) => string;
+
+type ProcessWriteObject =
+    | { s?: string, c?: string, b?: string }
+    | { str?: string, cl?: string, bg?: string }
+    | { string?: string, color?: string, background?: string }
+```
 
 ```js
 Ofn.processWrites( [ 

@@ -1,0 +1,4 @@
+{
+    "environment": "DEV",
+    "custom": { "chacho": true }
+}

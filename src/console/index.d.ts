@@ -1,0 +1,1 @@
+export { processWrite, processWrites } from './process-write';
