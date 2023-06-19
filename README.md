@@ -14,8 +14,8 @@
       * [Ofn.cryptoGenerateKeyPair()](#ofncryptogeneratekeypair)
     
     * [Files](#files)
-      * [await Ofn.obtainOConfig()](#await-ofnobtainoroconfig)
-      * [Ofn.obtainOConfigSync()](#ofnobtainoroconfigsync)
+      * [await Ofn.obtainOConfig()](#await-ofnobtainoconfig)
+      * [Ofn.obtainOConfigSync()](#ofnobtainoconfigsync)
       * [await Ofn.getFileJsonRecursively()](#await-ofngetfilejsonrecursively)
       * [Ofn.getFileJsonRecursivelySync()](#ofngetfilejsonrecursivelysync)
       * [await Ofn.globFiles()](#await-ofnglobfiles)
@@ -109,7 +109,25 @@ interface CryptoKeyPairOptions {
   privateKeyEncodingCipher?: string;
 }
 
-type CryptoKeyPairResponse = SResponse<CryptoKeyPairObject, CryptoKeyPairError>;
+type CryptoKeyPairResponse = SResponse<
+  CryptoKeyPairObject,  // as SResponseOK
+  CryptoKeyPairError    // as SResponseKO
+>;
+
+interface SResponseOK {
+  status: true,
+  passphrase: string;
+  publicKey: string;
+  privateKey: string;
+}
+
+interface SResponseKO {
+  status: false,
+  error: {
+    msg: string;
+    err: Error;
+  }
+}
 
 interface CryptoKeyPairObject {
   passphrase: string;
@@ -173,7 +191,23 @@ interface OConfigDefaultParams {
 }
 
 type OConfigResponse<T extends object = OConfigDefaultParams> = 
-    SResponse<OConfigObject<T>, OConfigError>;
+    SResponse<
+      OConfigObject<T>, // as SResponseOK
+      OConfigError      // as SResponseKO
+    >;
+
+interface SResponseOK {
+  status: true,
+  config: T;
+}
+
+interface SResponseKO {
+  status: false,
+  error: {
+    msg: string;
+    args?: OConfigArgs;
+  }
+}
 
 interface OConfigObject<T extends object = OConfigDefaultParams> {
   config: T;
@@ -419,7 +453,24 @@ await Ofn.pathIsFolder( `folder` );
 ```ts
 await Ofn.zipFolder = ( folderPath: string, zipPath?: string ) => Promise<ZipFolderResponse>;
 
-type ZipFolderResponse = SResponse<ZipFolderObject, ZipFolderError>;
+type ZipFolderResponse = SResponse<
+  ZipFolderObject, // as SResponseOK
+  ZipFolderError   // as SResponseKO
+>;
+
+interface SResponseOK {
+  status: true,
+  zipPath: string;
+}
+
+interface SResponseKO {
+  status: false,
+  error: {
+    msg: string;
+    folderPath?: string;
+    zipPath?: string;
+  }
+}
 
 interface ZipFolderObject {
   zipPath: string;
@@ -495,7 +546,23 @@ Ofn.osIsLinux();
 ```ts
 await Ofn.isPortFree = ( port: number ) => Promise<IsPortFreeResponse>;
 
-type IsPortFreeResponse = SResponse<PortFreeObject, IsPortFreeError>;
+type IsPortFreeResponse = SResponse<
+  PortFreeObject, // as SResponseOK
+  IsPortFreeError // as SResponseKO
+>;
+
+interface SResponseOK {
+  status: true,
+  port: number;
+}
+
+interface SResponseKO {
+  status: false,
+  error: {
+    msg: string;
+    port: number;
+  }
+}
 
 interface PortFreeObject {
   port: number;
@@ -519,7 +586,30 @@ await Ofn.isPortFree( 3000 );
 await Ofn.getPortFree = ( portStart?: number | number[], portEnd?: number ) 
     => Promise<GetPortFreeResponse>;
 
-type GetPortFreeResponse = SResponse<PortFreeObject, GetPortFreeError>;
+type GetPortFreeResponse = SResponse<
+  PortFreeObject,  // as SResponseOK
+  GetPortFreeError // as SResponseKO
+>;
+
+interface SResponseOK {
+  status: true,
+  port: number;
+}
+
+interface SResponseKO {
+  status: false,
+  error: {
+    msg: string;
+    port?: number;
+    opts?: {
+      random?: boolean;
+      port?: number;
+      ports?: number[];
+      portRange?: number[];
+    };
+    err?: any;
+  }
+}
 
 interface PortFreeObject {
   port: number;

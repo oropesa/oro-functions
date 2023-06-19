@@ -1,3 +1,6 @@
+## 1.3.2 / 2023-06-19
+* Improved _readme_ (`SResponseOK`, `SResponseKO`).
+
 ## 1.3.1 / 2023-06-17
 * Fixed bad declared `import` from `process-write`.
 
