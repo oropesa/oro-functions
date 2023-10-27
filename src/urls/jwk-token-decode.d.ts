@@ -1,1 +1,0 @@
-export type jwkTokenDecode = ( token: string ) => string;

@@ -1,1 +1,0 @@
-export { jwkTokenDecode } from './jwk-token-decode';

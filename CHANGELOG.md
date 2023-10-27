@@ -1,3 +1,36 @@
+## 2.0.0 / 2023-10-27
+
+**NOTE:**<br>
+⚠️ It's not valid anymore:<br>`const Ofn = require('oro-functions')`,<br>
+✔️ use the following instead:<br>`const { Ofn } = require('oro-functions')`
+
+* Added method `osIsAndroid`.
+* Updated method `isPortFree` adding a second param `host` (by default `localhost`) to check specific port.
+* Updated method `getPortFree` adding a third param `host` (by default `localhost`) to get free port.
+* Refactored `*.js` to `src/*.ts`.
+* Improved _typescript output declarations_.
+* Updated _package_ as `type: "module"`.
+* Added `tsup` and now _package_ is compiled to `cjs` _(common)_ and `mjs` _(module)_.
+* Added _github actions_:
+    * `validate_pr_to_master`
+    * `npm_publish_on_pr_merge_to_master`.
+* Added `husky` (to ensure only valid commits).
+* Added `eslint` (and applied it).
+* Added `prettier` (and applied it).
+* Updated _package description_
+* Updated libs:
+  * `fast-glob` to `v3.3.1`
+  * `get-port-please` to `v3.1.1`
+  * `oro-functions-client` to `v2.1.0`
+* Updated _dev_ libs:
+  * `@babel/core` to `v7.23.2`.
+  * `@babel/preset-env` to `v7.23.2`.
+  * `@babel/preset-typescript` to `v7.23.2`.
+  * `@types/express` to `4.17.20`
+  * `@types/jest` to `v29.5.6`.
+  * `babel-jest` to `v29.7.0`.
+  * `jest` to `v29.7.0`.
+
 ## 1.3.2 / 2023-06-19
 * Improved _readme_ (`SResponseOK`, `SResponseKO`).
 

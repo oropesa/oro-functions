@@ -4,46 +4,39 @@
 * [Installation](#installation)
 * [Example](#example)
 * [Methods](#methods)
-  * [Oro Functions Client](#oro-functions-client)
-  * [Extended Functions](#extended-functions)
-    
-    * [URLs](#urls)
-      * [Ofn.jwkTokenDecode()](#ofnjwktokendecode)
-       
-    * [Crypto](#crypto)
-      * [Ofn.cryptoGenerateKeyPair()](#ofncryptogeneratekeypair)
-    
-    * [Files](#files)
-      * [await Ofn.obtainOConfig()](#await-ofnobtainoconfig)
-      * [Ofn.obtainOConfigSync()](#ofnobtainoconfigsync)
-      * [await Ofn.getFileJsonRecursively()](#await-ofngetfilejsonrecursively)
-      * [Ofn.getFileJsonRecursivelySync()](#ofngetfilejsonrecursivelysync)
-      * [await Ofn.globFiles()](#await-ofnglobfiles)
-      * [await Ofn.folderIsEmpty()](#await-ofnfolderisempty)
-      * [await Ofn.pathIsFolder()](#await-ofnpathisfolder)
-      * [await Ofn.zipFolder()](#await-ofnzipfolder)
-    
-    * [Operating System](#operating-system)
-      * [Ofn.osPlatform()](#ofnosplatform)
-      * [Ofn.osIsWindows()](#ofnosiswindows)
-      * [Ofn.osIsMac()](#ofnosismac)
-      * [Ofn.osIsLinux()](#ofnosislinux)
-    
-    * [Ports](#ports)
-      * [await Ofn.isPortFree()](#await-ofnisportfree)
-      * [await Ofn.getPortFree()](#await-ofngetportfree)
-    
-    * [Console](#console)
-      * [Ofn.processWrite()](#ofnprocesswrite)
-      * [Ofn.processWrites()](#ofnprocesswrites)
 
 ## Overview
 
-By default, **Ofn**, it's a simple class with helper static functions.
+**Ofn** contains utility static methods (helpers).
 
-This package ( `oro-functions` ) is divided from `oro-functions-client` to allow using that functions in _js-client frameworks_ like `Vuejs`.
+This package ( `oro-functions` ) is divided from `oro-functions-client` to allow using that functions in _js-client frameworks_ like `Vuejs` or `React`.
 
-Class `oro-functions` is extended from `oro-functions-client`. If you want to know all fns, read **[oro-functions-client](https://github.com/oropesa/oro-functions-client/)**.
+Class `oro-functions` is extended from `oro-functions-client`. 
+
+If you want to know all fns, read **[oro-functions-client](https://github.com/oropesa/oro-functions-client/)**.
+
+Functions could be divided in groups: <br>
+⇢ (Extended) <br>
+· [URLs](#urls) <br>
+· [Crypto](#crypto) <br>
+· [Files](#files) <br>
+· [Operating System](#operating-system) <br>
+· [Ports](#ports) <br>
+· [Console](#console) <br>
+⇢ (Client) <br>
+· [General](https://github.com/oropesa/oro-functions-client#general) <br>
+· [Numbers](https://github.com/oropesa/oro-functions-client#numbers) <br>
+· [String](https://github.com/oropesa/oro-functions-client#string) <br>
+· [Crypto](https://github.com/oropesa/oro-functions-client#crypto) <br>
+· [Functions](https://github.com/oropesa/oro-functions-client#functions) <br>
+· [Classes](https://github.com/oropesa/oro-functions-client#objects) <br>
+· [Objects](https://github.com/oropesa/oro-functions-client#objects) <br>
+· [Arrays](https://github.com/oropesa/oro-functions-client#arrays) <br>
+· [Dates](https://github.com/oropesa/oro-functions-client#dates) <br>
+· [URLs](https://github.com/oropesa/oro-functions-client#urls) <br>
+· [Files](https://github.com/oropesa/oro-functions-client#files) <br>
+· [PHP Serialize](https://github.com/oropesa/oro-functions-client#php-serialize) <br>
+· [Response](https://github.com/oropesa/oro-functions-client#response) <br>
 
 ## Installation
 
@@ -53,16 +46,61 @@ npm install oro-functions
 
 ## Example:
 ```js
-const Ofn = require( 'oro-functions' );
+// cjs
+const { Ofn } = require( 'oro-functions' );
 
-// ts
-import Ofn from 'oro-functions';
+// mjs, ts
+import { Ofn } from 'oro-functions';
 
-Ofn.type( [ 1, 2, 3 ] );
-// 'array'
+Ofn.type( [ 1, 2, 3 ] ); // -> 'array'
+```
+
+also every method could be called individually:
+```js
+// cjs
+const { type } = require( 'oro-functions' );
+
+// mjs, ts
+import { type } from 'oro-functions';
+
+type( [ 1, 2, 3 ] ); // -> 'array'
 ```
 
 ## Methods
+
+* [Oro Functions Client](#oro-functions-client)
+* [Extended Functions](#extended-functions)
+
+  * [URLs](#urls)
+    * [Ofn.jwkTokenDecode()](#ofnjwktokendecode)
+
+  * [Crypto](#crypto)
+    * [Ofn.cryptoGenerateKeyPair()](#ofncryptogeneratekeypair)
+
+  * [Files](#files)
+    * [await Ofn.obtainOConfig()](#await-ofnobtainoconfig)
+    * [Ofn.obtainOConfigSync()](#ofnobtainoconfigsync)
+    * [await Ofn.getFileJsonRecursively()](#await-ofngetfilejsonrecursively)
+    * [Ofn.getFileJsonRecursivelySync()](#ofngetfilejsonrecursivelysync)
+    * [await Ofn.globFiles()](#await-ofnglobfiles)
+    * [await Ofn.folderIsEmpty()](#await-ofnfolderisempty)
+    * [await Ofn.pathIsFolder()](#await-ofnpathisfolder)
+    * [await Ofn.zipFolder()](#await-ofnzipfolder)
+
+  * [Operating System](#operating-system)
+    * [Ofn.osPlatform()](#ofnosplatform)
+    * [Ofn.osIsWindows()](#ofnosiswindows)
+    * [Ofn.osIsMac()](#ofnosismac)
+    * [Ofn.osIsLinux()](#ofnosislinux)
+    * [Ofn.osIsAndroid()](#ofnosisandroid)
+
+  * [Ports](#ports)
+    * [await Ofn.isPortFree()](#await-ofnisportfree)
+    * [await Ofn.getPortFree()](#await-ofngetportfree)
+
+  * [Console](#console)
+    * [Ofn.processWrite()](#ofnprocesswrite)
+    * [Ofn.processWrites()](#ofnprocesswrites)
 
 <hr>
 
@@ -535,6 +573,18 @@ Ofn.osIsLinux = () => boolean;
 
 ```js
 Ofn.osIsLinux();
+// -> true
+```
+
+<hr>
+
+#### Ofn.osIsAndroid()
+```ts
+Ofn.osIsAndroid = () => boolean;
+```
+
+```js
+Ofn.osIsAndroid();
 // -> true
 ```
 

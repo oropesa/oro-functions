@@ -1,8 +1,9 @@
-const { Ofn } = require('../../dist');
+import Ofn from '../../dist';
+import type { CryptoKeyPairResponse } from '../../src/';
 
 describe('fn: cryptoGenerateKeyPair', () => {
   test('fn: cryptoGenerateKeyPair( undefined )', async () => {
-    let response = await Ofn.cryptoGenerateKeyPair();
+    const response: CryptoKeyPairResponse = await Ofn.cryptoGenerateKeyPair();
 
     expect(response.status).toBe(true);
 
@@ -16,7 +17,7 @@ describe('fn: cryptoGenerateKeyPair', () => {
   });
 
   test('fn: cryptoGenerateKeyPair( bad options )', async () => {
-    let response = await Ofn.cryptoGenerateKeyPair('', {
+    let response: CryptoKeyPairResponse = await Ofn.cryptoGenerateKeyPair('', {
       publicKeyEncodingType: 'chacho',
     });
 
