@@ -1,3 +1,15 @@
+## 2.0.1 / 2023-11-03
+* Fixed typescript output definition of _fn_ `getFileJsonRecursively`, `getFileJsonRecursivelySync` to simplify their use (removing `{}`).
+* Updated _dev_ libs:
+    * `@types/jest` from `v29.5.6` to `v29.5.7`.
+    * `@typescript-eslint/eslint-plugin` from `v6.9.0` to `v6.9.1`.
+    * `@typescript-eslint/parser` from `v6.9.0` to `v6.9.1`.
+    * `eslint-plugin-unicorn` from `v48.0.1` to `v49.0.0`.
+* Deleted non-use _dev_ libs:
+    * `@types/crypto-js`.
+    * `@types/express`.
+    * `@types/lodash.clonedeep`.
+    
 ## 2.0.0 / 2023-10-27
 
 **NOTE:**<br>
