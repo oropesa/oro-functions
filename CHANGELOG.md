@@ -1,3 +1,6 @@
+## 2.0.3 / 2023-11-23
+* Updated lib: `oro-functions-client` from `v2.1.1` to `v2.1.2`.
+
 ## 2.0.2 / 2023-11-22
 * Fixed _github action_ `npm_publish_on_pr_merge_to_master`.
 * Updated libs:
