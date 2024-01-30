@@ -40,7 +40,7 @@
     "atob": "^2.1.2",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.1.1",
-    "get-port-please": "^3.1.1",
+    "get-port-please": "^3.1.2",
     "oro-functions-client": "^2.1.2",
     "zip-lib": "^0.7.3"
   },
