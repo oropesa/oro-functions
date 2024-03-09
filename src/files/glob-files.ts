@@ -1,13 +1,10 @@
 import fglob from 'fast-glob';
-import { isString, isArray, isObject, sanitizePath } from 'oro-functions-client';
 import type { Options } from 'fast-glob';
+import { isArray, isObject, isString, sanitizePath } from 'oro-functions-client';
 
 export type GlobFilesOptions = Options;
 
-export async function globFiles(
-  folderPath: string | string[],
-  globArgs: GlobFilesOptions = {},
-): Promise<string[]> {
+export async function globFiles(folderPath: string | string[], globArgs: GlobFilesOptions = {}): Promise<string[]> {
   if (!isString(folderPath) && !isArray(folderPath)) {
     return [];
   }

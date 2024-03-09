@@ -1,5 +1,5 @@
-import { isString } from 'oro-functions-client';
 import atob from 'atob';
+import { isString } from 'oro-functions-client';
 
 export function jwkTokenDecode(token: string): string {
   if (!isString(token)) {

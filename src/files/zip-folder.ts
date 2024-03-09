@@ -1,14 +1,9 @@
-import { archiveFile, archiveFolder } from 'zip-lib';
 import fsExtra from 'fs-extra';
+import { isNully, isString, sanitizePath, setResponseKO, setResponseOK } from 'oro-functions-client';
+import type { SResponseKOObject, SResponseOKObject } from 'oro-functions-client';
+import { archiveFile, archiveFolder } from 'zip-lib';
+
 import { pathIsFolder } from './path-is-folder';
-import {
-  isString,
-  isNully,
-  sanitizePath,
-  setResponseKO,
-  setResponseOK,
-} from 'oro-functions-client';
-import type { SResponseOKObject, SResponseKOObject } from 'oro-functions-client';
 
 export interface ZipFolderObject {
   zipPath: string;
@@ -20,9 +15,7 @@ export interface ZipFolderError {
   zipPath?: string;
 }
 
-export type ZipFolderResponse =
-  | SResponseOKObject<ZipFolderObject>
-  | SResponseKOObject<ZipFolderError>;
+export type ZipFolderResponse = SResponseOKObject<ZipFolderObject> | SResponseKOObject<ZipFolderError>;
 
 export async function zipFolder(folderPath: string, zipPath?: string): Promise<ZipFolderResponse> {
   if (!isString(folderPath)) {
@@ -30,7 +23,7 @@ export async function zipFolder(folderPath: string, zipPath?: string): Promise<Z
   }
 
   let folderDirectory = sanitizePath(folderPath);
-  let zipFile = isNully(zipPath)
+  const zipFile = isNully(zipPath)
     ? `${folderDirectory.slice(-1) === '/' ? folderDirectory.slice(0, -1) : folderDirectory}.zip`
     : zipPath;
 
@@ -56,7 +49,7 @@ export async function zipFolder(folderPath: string, zipPath?: string): Promise<Z
       });
     }
 
-    let response = await archiveFolder(folderDirectory, zipFile)
+    const response = await archiveFolder(folderDirectory, zipFile)
       .then(() => setResponseOK())
       .catch((error: Error) =>
         setResponseKO(`zipFolder ${error.toString()}`, {
@@ -69,7 +62,7 @@ export async function zipFolder(folderPath: string, zipPath?: string): Promise<Z
       return response;
     }
   } else {
-    let response = await archiveFile(folderDirectory, zipFile)
+    const response = await archiveFile(folderDirectory, zipFile)
       .then(() => setResponseOK())
       .catch((error: Error) =>
         setResponseKO(`zipFolder ${error.toString()}`, {

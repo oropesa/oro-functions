@@ -1,11 +1,11 @@
 import fsExtra from 'fs-extra';
 import {
-  isString,
-  isNumeric,
-  objIsEmpty,
   getFilenameByPath,
   getFolderByPath,
+  isNumeric,
+  isString,
   mergeObjectsDeep,
+  objIsEmpty,
 } from 'oro-functions-client';
 
 export async function getFileJsonRecursively<T extends Record<string | number, any>>(
@@ -13,14 +13,14 @@ export async function getFileJsonRecursively<T extends Record<string | number, a
   parentDeep = 0,
 ): Promise<T> {
   if (!isString(filenameOrPath)) {
-    return {} as any;
+    return {} as unknown as T;
   }
 
   let deep = isNumeric(parentDeep) ? parentDeep : 0;
   const filename = getFilenameByPath(filenameOrPath);
   // eslint-disable-next-line unicorn/prefer-module
   let folder = filenameOrPath === filename ? __filename : filenameOrPath;
-  let jsonOutput: T = {} as any;
+  let jsonOutput: T = {} as unknown as T;
 
   filenameOrPath === filename && (deep += 2);
 
@@ -42,7 +42,7 @@ export function getFileJsonRecursivelySync<T extends Record<string | number, any
   parentDeep = 0,
 ): T {
   if (!isString(filenameOrPath)) {
-    return {} as any;
+    return {} as unknown as T;
   }
 
   let deep = isNumeric(parentDeep) ? parentDeep : 0;
@@ -51,13 +51,13 @@ export function getFileJsonRecursivelySync<T extends Record<string | number, any
   filenameOrPath === filename && (deep += 2);
   // eslint-disable-next-line unicorn/prefer-module
   let folder = filenameOrPath === filename ? __filename : filenameOrPath;
-  let jsonOutput = {} as any;
+  let jsonOutput = {} as unknown as T;
 
   do {
     folder = getFolderByPath(folder);
     try {
       const jsonFile = fsExtra.readJsonSync(`${folder}/${filename}`);
-      jsonOutput = mergeObjectsDeep({}, jsonFile, jsonOutput);
+      jsonOutput = mergeObjectsDeep<T>({}, jsonFile, jsonOutput);
     } catch {}
 
     deep--;

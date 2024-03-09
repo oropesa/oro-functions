@@ -1,33 +1,29 @@
-$schema: https://json.schemastore.org/eslintrc
+parser: '@typescript-eslint/parser'
+plugins:
+  - '@typescript-eslint'
+  - 'jest-formatting'
 extends:
   - alloy
   - alloy/typescript
+  - eslint:recommended
+  - plugin:jest/recommended
   - plugin:unicorn/recommended
-parserOptions:
-  project: './tsconfig.json'
-globals:
-  expect: readonly
-  test: readonly
-  jest: readonly
-  describe: readonly
-overrides:
-  - files:
-      - '**/*.ts'
-      - '**/*.tsx'
-    env:
-      jest: true
+  - plugin:jest-formatting/recommended
+  - plugin:@typescript-eslint/recommended
+  - prettier
 ignorePatterns:
+  - coverage/
   - dist/
-  - tests/*.js
-  - tests/*/*.js
+  - '**/*.test.js'
   - tmp.js
 rules:
-  max-params: ["error", 4]
+  max-params: ['error', 4]
+  '@typescript-eslint/no-explicit-any': off
   '@typescript-eslint/no-unused-vars':
     - error
     - argsIgnorePattern: '^_'
       varsIgnorePattern: '^_'
-  unicorn/switch-case-braces: ["error", "avoid"]
+  unicorn/switch-case-braces: ['error', 'avoid']
   unicorn/no-null: off
   unicorn/no-array-reduce: off
   unicorn/no-nested-ternary: off

@@ -1,15 +1,13 @@
 import { getPort } from 'get-port-please';
-import { isNully, isArray, isNumeric, setResponseKO, setResponseOK } from 'oro-functions-client';
 import type { GetPortOptions } from 'get-port-please';
+import { isArray, isNully, isNumeric, setResponseKO, setResponseOK } from 'oro-functions-client';
 import type { SResponseKOObject, SResponseOKObject } from 'oro-functions-client';
 
 export interface PortFreeObject {
   port: number;
 }
 
-export type GetPortFreeOptions = Partial<
-  Pick<GetPortOptions, 'random' | 'port' | 'ports' | 'portRange' | 'host'>
->;
+export type GetPortFreeOptions = Partial<Pick<GetPortOptions, 'random' | 'port' | 'ports' | 'portRange' | 'host'>>;
 
 export interface GetPortFreeError {
   msg: string;
@@ -18,16 +16,14 @@ export interface GetPortFreeError {
   err?: Error;
 }
 
-export type GetPortFreeResponse =
-  | SResponseOKObject<PortFreeObject>
-  | SResponseKOObject<GetPortFreeError>;
+export type GetPortFreeResponse = SResponseOKObject<PortFreeObject> | SResponseKOObject<GetPortFreeError>;
 
 export async function getPortFree(
   portStart?: number | number[],
   portEnd?: number,
   host = 'localhost',
 ): Promise<GetPortFreeResponse> {
-  let opts: GetPortFreeOptions = { host, random: true };
+  const opts: GetPortFreeOptions = { host, random: true };
 
   if (!isNully(portEnd)) {
     let start = Number(portStart);
@@ -38,9 +34,7 @@ export async function getPortFree(
     }
 
     if (!portStart || isArray(portStart) || !isNumeric(portStart)) {
-      return setResponseKO(
-        `param:portStart must be a number when portEnd is enabled. portStart: ${portStart}`,
-      );
+      return setResponseKO(`param:portStart must be a number when portEnd is enabled. portStart: ${portStart}`);
     }
 
     start > end && ([start, end] = [end, start]);

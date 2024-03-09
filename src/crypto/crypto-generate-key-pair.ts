@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { isObject, cloneObject, setResponseOK, setResponseKO } from 'oro-functions-client';
+import { cloneObject, isObject, setResponseKO, setResponseOK } from 'oro-functions-client';
 import type { SResponseKOObject, SResponseOKObject } from 'oro-functions-client';
 
 export interface CryptoKeyPairObject {
@@ -13,20 +13,9 @@ export interface CryptoKeyPairError {
   err: Error;
 }
 
-export type CryptoKeyPairResponse =
-  | SResponseOKObject<CryptoKeyPairObject>
-  | SResponseKOObject<CryptoKeyPairError>;
+export type CryptoKeyPairResponse = SResponseOKObject<CryptoKeyPairObject> | SResponseKOObject<CryptoKeyPairError>;
 
-export type CryptoKeyPairType =
-  | 'rsa'
-  | 'rsa-pss'
-  | 'dsa'
-  | 'ec'
-  | 'ed25519'
-  | 'ed448'
-  | 'x25519'
-  | 'x448'
-  | 'dh';
+export type CryptoKeyPairType = 'rsa' | 'rsa-pss' | 'dsa' | 'ec' | 'ed25519' | 'ed448' | 'x25519' | 'x448' | 'dh';
 
 export interface CryptoKeyPairOptions {
   type?: CryptoKeyPairType;
