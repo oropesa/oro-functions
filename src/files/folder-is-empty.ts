@@ -1,12 +1,9 @@
-import { globFiles } from './glob-files';
-import { isString, isObject, sanitizePath } from 'oro-functions-client';
+import { isObject, isString, sanitizePath } from 'oro-functions-client';
 
+import { globFiles } from './glob-files';
 import type { GlobFilesOptions } from './glob-files';
 
-export async function folderIsEmpty(
-  folderPath: string,
-  globArgs: GlobFilesOptions = {},
-): Promise<boolean> {
+export async function folderIsEmpty(folderPath: string, globArgs: GlobFilesOptions = {}): Promise<boolean> {
   if (!isString(folderPath)) {
     return false;
   }

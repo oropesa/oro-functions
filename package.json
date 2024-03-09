@@ -1,6 +1,6 @@
 {
   "name": "oro-functions",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "The Class Ofn extends Ofn-client and includes additional static helper functions for: URLs, Files, Operating System.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -15,10 +15,15 @@
   },
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
+    "coverage:open": "node coverage.open.js",
+    "coverage-open": "jest --coverage & node coverage.open.js",
     "lint": "eslint .",
+    "prettier": "prettier --write .",
     "clean": "rm -R ./dist",
     "clean:all": "rm -R ./dist ./node_modules",
-    "build": "tsup ./src/index.ts --format cjs,esm --dts --clean"
+    "build": "tsup ./src/index.ts",
+    "watch": "nodemon"
   },
   "keywords": [
     "constant",
@@ -39,28 +44,33 @@
   "dependencies": {
     "atob": "^2.1.2",
     "fast-glob": "^3.3.2",
-    "fs-extra": "^11.1.1",
-    "get-port-please": "^3.1.1",
-    "oro-functions-client": "^2.1.2",
-    "zip-lib": "^0.7.3"
+    "fs-extra": "^11.2.0",
+    "get-port-please": "^3.1.2",
+    "oro-functions-client": "^2.2.0",
+    "zip-lib": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.3",
-    "@babel/preset-env": "^7.23.3",
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/atob": "^2.1.4",
     "@types/fs-extra": "^11.0.4",
-    "@types/jest": "^29.5.10",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
+    "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
     "babel-jest": "^29.7.0",
-    "eslint": "^8.54.0",
+    "eslint": "^8.57.0",
     "eslint-config-alloy": "^5.1.2",
-    "eslint-plugin-unicorn": "^49.0.0",
-    "husky": "^8.0.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-jest-formatting": "^3.1.0",
+    "eslint-plugin-unicorn": "^51.0.1",
+    "husky": "^9.0.11",
     "jest": "^29.7.0",
-    "prettier": "^3.1.0",
-    "tsup": "^8.0.1",
-    "typescript": "^5.2.2"
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
   }
 }

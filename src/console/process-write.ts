@@ -1,16 +1,13 @@
-import { isObject, isArray, isString } from 'oro-functions-client';
+import { isArray, isObject, isString } from 'oro-functions-client';
 
-export type ProcessWriteColor =
-  | 'gray'
-  | 'red'
-  | 'green'
-  | 'white'
-  | 'yellow'
-  | 'blue'
-  | 'redlight'
-  | 'bluelight';
+const PROCESS_WRITE_COLORS = ['gray', 'red', 'green', 'white', 'yellow', 'blue', 'redlight', 'bluelight'] as const;
+const PROCESS_WRITE_COLOR_NUMBER = [90, 91, 92, 93, 93, 94, 95, 96] as const;
+const PROCESS_WRITE_BACKGROUND_NUMBER = [100, 101, 102, 103, 103, 104, 105, 106] as const;
 
-export type ProcessWriteBackground = ProcessWriteColor;
+export type ProcessWriteColor = (typeof PROCESS_WRITE_COLORS)[number];
+export type ProcessWriteBackground = (typeof PROCESS_WRITE_COLORS)[number];
+export type ProcessWriteColorNumber = (typeof PROCESS_WRITE_COLOR_NUMBER)[number];
+export type ProcessWriteBackgroundNumber = (typeof PROCESS_WRITE_BACKGROUND_NUMBER)[number];
 
 export interface ProcessWriteObjectShort {
   s: string;
@@ -28,16 +25,9 @@ export interface ProcessWriteObjectVerbose {
   background?: ProcessWriteBackground;
 }
 
-export type ProcessWriteObject =
-  | ProcessWriteObjectShort
-  | ProcessWriteObjectSimple
-  | ProcessWriteObjectVerbose;
+export type ProcessWriteObject = ProcessWriteObjectShort | ProcessWriteObjectSimple | ProcessWriteObjectVerbose;
 
-export function processWrite(
-  string: string,
-  color?: ProcessWriteColor,
-  background?: ProcessWriteBackground,
-): string;
+export function processWrite(string: string, color?: ProcessWriteColor, background?: ProcessWriteBackground): string;
 export function processWrite(object: ProcessWriteObject): string;
 export function processWrite(
   strOrObject: string | ProcessWriteObject,
@@ -75,7 +65,7 @@ export function processWrite(
   return config.s;
 }
 
-export function processWrites(array: Array<string | ProcessWriteObject>) {
+export function processWrites(array: Array<string | ProcessWriteObject>): string {
   if (!isArray(array)) {
     return '';
   }
@@ -88,7 +78,7 @@ export function processWrites(array: Array<string | ProcessWriteObject>) {
   return string;
 }
 
-const COLORS: { [key in ProcessWriteColor]: number } = {
+const COLORS: Record<ProcessWriteColor, ProcessWriteColorNumber> = {
   gray: 90,
   red: 91,
   green: 92,
@@ -98,7 +88,7 @@ const COLORS: { [key in ProcessWriteColor]: number } = {
   redlight: 95,
   bluelight: 96,
 };
-const BGS: { [key in ProcessWriteColor]: number } = {
+const BGS: Record<ProcessWriteColor, ProcessWriteBackgroundNumber> = {
   gray: 100,
   red: 101,
   green: 102,
@@ -109,6 +99,6 @@ const BGS: { [key in ProcessWriteColor]: number } = {
   bluelight: 106,
 };
 
-function colorize(output: string, color: number) {
+function colorize(output: string, color: number): string {
   return ['\u001B[', color, 'm', output, '\u001B[0m'].join('');
 }
