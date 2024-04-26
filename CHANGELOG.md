@@ -1,46 +1,65 @@
+## 2.1.1 / 2024-04-26
+
+- Improved _github cicd_ replacing `actions/--@v3` by `actions/--@v4`.
+- Fixed _prettier_ `endOfLine: 'lf'`
+- Updated _libs_:
+  - `oro-functions-client` from `v2.2.0` to `v2.2.2`.
+  - `zip-lib` from `v1.0.0` to `v1.0.4`.
+- Added _dev_ libs:
+  - `eslint-plugin-github@^4.10.2`
+- Updated _dev_ libs:
+  - `@babel/core` from `v7.23.9` to `v7.24.4`.
+  - `@babel/preset-env` from `v7.23.9` to `v7.24.4`.
+  - `@babel/preset-typescript` from `v7.23.3` to `v7.24.1`.
+  - `@typescript-eslint/eslint-plugin` from `v7.0.2` to `v7.7.1`.
+  - `@typescript-eslint/parser` from `v7.0.2` to `v7.7.1`.
+  - `eslint-plugin-jest` from `v27.9.0` to `v28.2.0`.
+  - `eslint-plugin-unicorn` from `v51.0.1` to `v52.0.0`.
+  - `typescript` from `v5.3.3` to `v5.4.5`.
+
 ## 2.1.0 / 2024-03-09
 
-* Updated some _functions_:
-  * Updated `obtainingConfig`, `obtainOConfigSync` using by default the file `oconfig.json`.
-  * Added in console _process write_:
-    * consts `PROCESS_WRITE_COLORS`, `PROCESS_WRITE_COLOR_NUMBER`, `PROCESS_WRITE_BACKGROUND_NUMBER`.
-    * types `ProcessWriteColorNumber`, `ProcessWriteBackgroundNumber`.
-* Setted a deprecated some functions:
-  * `obtainOroConfig`, use `obtainOConfig` with `oconfig.json` as default file instead.
-  * `obtainOroConfigSync`, use `obtainOConfigSync` with `oconfig.json` as default file instead.
-  * `isPortAvailable`, use `isPortFree` instead.
-* Fixed `let` by `const` when it's required.
-* Added _coverage_ for testing.
-* Added _watcher_ for coding.
-* Improved _github cicd_ replacing `npm install` to `npm ci`.
-* Improved `export` declarations in index files.
-* Enhanced _linter_ adding some extensions.
-* Enhanced _prettier_ adding import-sorter.
-* Improved tests migrating every test to the same level as their source file.
-* Enhanced testing to achieve the `~95%` of coverage (yay!).
-* Updated libs:
-  * `fs-extra` from `v11.1.1` to `v11.2.0`.
-  * `get-port-please` from `^3.1.1` to `v3.1.2`.
-  * `oro-functions-client` from `v2.1.2` to `v2.2.0`.
-  * `zip-lib` from `v0.7.3` to `v1.0.0`.
-* Updated _dev_ libs:
-  * `@babel/core` from `v7.23.3` to `v7.23.9`.
-  * `@babel/preset-env` from `v7.23.3` to `v7.23.9`.
-  * `@types/jest` from `v29.5.10` to `v29.5.12`.
-  * `@typescript-eslint/eslint-plugin` from `v6.12.0` to `v7.0.2`.
-  * `@typescript-eslint/parser` from `v6.12.0` to `v7.0.2`.
-  * `eslint` from `v8.54.0` to `v^8.57.0`.
-  * `eslint-plugin-unicorn` from `v49.0.0` to `v50.0.1`.
-  * `husky` from `v8.0.3` to `v9.0.11`.
-  * `prettier` from `v3.1.0` to `v3.2.5`.
-  * `tsup` from `v8.0.1` to `v8.0.2`.
-  * `typescript` from `v5.2.2` to `v5.3.3`.
-* Added _dev_ libs:
-  * `@trivago/prettier-plugin-sort-imports`
-  * `eslint-plugin-jest-formatting`
-  * `eslint-config-prettier`
-  * `eslint-plugin-jest`
-  * `nodemon`
+- Updated some _functions_:
+  - Updated `obtainingConfig`, `obtainOConfigSync` using by default the file `oconfig.json`.
+  - Added in console _process write_:
+    - consts `PROCESS_WRITE_COLORS`, `PROCESS_WRITE_COLOR_NUMBER`, `PROCESS_WRITE_BACKGROUND_NUMBER`.
+    - types `ProcessWriteColorNumber`, `ProcessWriteBackgroundNumber`.
+- Setted a deprecated some functions:
+  - `obtainOroConfig`, use `obtainOConfig` with `oconfig.json` as default file instead.
+  - `obtainOroConfigSync`, use `obtainOConfigSync` with `oconfig.json` as default file instead.
+  - `isPortAvailable`, use `isPortFree` instead.
+- Fixed `let` by `const` when it's required.
+- Added _coverage_ for testing.
+- Added _watcher_ for coding.
+- Improved _github cicd_ replacing `npm install` to `npm ci`.
+- Improved `export` declarations in index files.
+- Enhanced _linter_ adding some extensions.
+- Enhanced _prettier_ adding import-sorter.
+- Improved tests migrating every test to the same level as their source file.
+- Enhanced testing to achieve the `~95%` of coverage (yay!).
+- Updated libs:
+  - `fs-extra` from `v11.1.1` to `v11.2.0`.
+  - `get-port-please` from `^3.1.1` to `v3.1.2`.
+  - `oro-functions-client` from `v2.1.2` to `v2.2.0`.
+  - `zip-lib` from `v0.7.3` to `v1.0.0`.
+- Updated _dev_ libs:
+  - `@babel/core` from `v7.23.3` to `v7.23.9`.
+  - `@babel/preset-env` from `v7.23.3` to `v7.23.9`.
+  - `@types/jest` from `v29.5.10` to `v29.5.12`.
+  - `@typescript-eslint/eslint-plugin` from `v6.12.0` to `v7.0.2`.
+  - `@typescript-eslint/parser` from `v6.12.0` to `v7.0.2`.
+  - `eslint` from `v8.54.0` to `v^8.57.0`.
+  - `eslint-plugin-unicorn` from `v49.0.0` to `v50.0.1`.
+  - `husky` from `v8.0.3` to `v9.0.11`.
+  - `prettier` from `v3.1.0` to `v3.2.5`.
+  - `tsup` from `v8.0.1` to `v8.0.2`.
+  - `typescript` from `v5.2.2` to `v5.3.3`.
+- Added _dev_ libs:
+  - `@trivago/prettier-plugin-sort-imports`
+  - `eslint-plugin-jest-formatting`
+  - `eslint-config-prettier`
+  - `eslint-plugin-jest`
+  - `nodemon`
 
 ## 2.0.3 / 2023-11-23
 

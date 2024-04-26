@@ -14,7 +14,6 @@ describe('fn: jwkTokenDecode', () => {
   });
 
   test('fn: jwkTokenDecode( str ) atob', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (global as any).atob = undefined;
 
     expect(jwkTokenDecode(TOKEN_JWK)).toBe('{"user":"oropesa","iat":1629713363,"exp":1629720563}');

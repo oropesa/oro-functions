@@ -17,14 +17,14 @@ describe('fn: isPortFree', () => {
 
     expect(response).toEqual({
       status: false,
-      error: { msg: `Port already in use: ${port}.`, port: port },
+      error: { msg: `Port already in use: ${port}.`, port },
     });
   });
 
   test('fn: isPortFree( port )', async () => {
     const port = 4100;
     const response = await isPortFree(port);
-    expect(response).toEqual({ status: true, port: port });
+    expect(response).toEqual({ status: true, port });
   });
 });
 
@@ -32,6 +32,6 @@ describe('fn: isPortAvailable', () => {
   test('fn: isPortAvailable( port )', async () => {
     const port = 4200;
     const response = await isPortAvailable(port);
-    expect(response).toEqual({ status: true, port: port });
+    expect(response).toEqual({ status: true, port });
   });
 });
