@@ -14,7 +14,7 @@ export function jwkTokenDecode(token: string): string {
   try {
     return decodeURIComponent(
       [...fnAtob(jwtToken.replace('-', '+').replace('_', '/'))]
-        .map((c) => `%${('00' + c.codePointAt(0)!.toString(16)).slice(-2)}`)
+        .map((c) => `%${`00${c.codePointAt(0)!.toString(16)}`.slice(-2)}`)
         .join(''),
     );
   } catch {
