@@ -22,7 +22,7 @@ describe('fn: isPortFree', () => {
   });
 
   test('fn: isPortFree( port )', async () => {
-    const port = 4100;
+    const port = 4101;
     const response = await isPortFree(port);
     expect(response).toEqual({ status: true, port });
   });
