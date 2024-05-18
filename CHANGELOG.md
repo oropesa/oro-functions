@@ -1,3 +1,27 @@
+## 2.3.0 / 2024-05-18
+- Jumped version `2.2.0` to `2.3.0`, to have the same minor-version of `oro-functions-client`.
+- Updated *eslint* to flat `eslint.config.js`.
+- Simplified `tsup.config.ts`.
+- Re-init `package-lock.json`.
+- Updated _prettier_ `printWidth: 120`
+- Updated libs:
+  - `oro-functions-client` from `v2.2.2` to `v2.3.0`.
+- Updated _dev_ libs:
+  - `@babel/core` from `v7.24.4` to `v7.24.5`.
+  - `@babel/preset-env` from `v7.24.4` to `v7.24.5`.
+  - `eslint-plugin-jest` from `v28.2.0` to `v28.5.0`.
+  - `eslint-plugin-unicorn` from `v52.0.0` to `v53.0.0`.
+- Added _dev_ libs:
+  - `@eslint/js` added `v9.2.0`.
+  - `globals` added `v15.2.0`.
+  - `typescript-eslint` added `v7.9.0`.
+- Removed _dev_ libs:
+  - `@typescript-eslint/eslint-plugin` removed.
+  - `@typescript-eslint/parser` removed.
+  - `eslint-config-alloy` removed.
+  - `eslint-plugin-github` removed.
+  - `eslint-plugin-jest-formatting` removed.
+
 ## 2.1.1 / 2024-04-26
 
 - Improved _github cicd_ replacing `actions/--@v3` by `actions/--@v4`.
