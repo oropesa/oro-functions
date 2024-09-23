@@ -2,7 +2,6 @@ import { sanitizePath } from 'oro-functions-client';
 
 import { globFiles } from './glob-files';
 
-// eslint-disable-next-line unicorn/prefer-module
 const TEST_PATH = `${__dirname}/__tests__`;
 
 describe('fn: globFiles', () => {

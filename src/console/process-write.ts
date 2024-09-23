@@ -1,13 +1,9 @@
 import { isArray, isObject, isString } from 'oro-functions-client';
 
-const PROCESS_WRITE_COLORS = ['gray', 'red', 'green', 'white', 'yellow', 'blue', 'redlight', 'bluelight'] as const;
-const PROCESS_WRITE_COLOR_NUMBER = [90, 91, 92, 93, 93, 94, 95, 96] as const;
-const PROCESS_WRITE_BACKGROUND_NUMBER = [100, 101, 102, 103, 103, 104, 105, 106] as const;
-
-export type ProcessWriteColor = (typeof PROCESS_WRITE_COLORS)[number];
-export type ProcessWriteBackground = (typeof PROCESS_WRITE_COLORS)[number];
-export type ProcessWriteColorNumber = (typeof PROCESS_WRITE_COLOR_NUMBER)[number];
-export type ProcessWriteBackgroundNumber = (typeof PROCESS_WRITE_BACKGROUND_NUMBER)[number];
+export type ProcessWriteColor = 'gray' | 'red' | 'green' | 'white' | 'yellow' | 'blue' | 'redlight' | 'bluelight';
+export type ProcessWriteBackground = 'gray' | 'red' | 'green' | 'white' | 'yellow' | 'blue' | 'redlight' | 'bluelight';
+export type ProcessWriteColorNumber = 90 | 91 | 92 | 93 | 94 | 95 | 96;
+export type ProcessWriteBackgroundNumber = 100 | 101 | 102 | 103 | 104 | 105 | 106;
 
 export interface ProcessWriteObjectShort {
   s: string;
@@ -36,17 +32,17 @@ export function processWrite(
 ) {
   const config: ProcessWriteObjectShort = { s: '', c: undefined, b: undefined };
   if (isObject(strOrObject)) {
-    's' in strOrObject && (config.s = strOrObject.s);
-    'str' in strOrObject && (config.s = strOrObject.str);
-    'string' in strOrObject && (config.s = strOrObject.string);
+    if ('s' in strOrObject) config.s = strOrObject.s;
+    if ('str' in strOrObject) config.s = strOrObject.str;
+    if ('string' in strOrObject) config.s = strOrObject.string;
 
-    'c' in strOrObject && (config.c = strOrObject.c);
-    'cl' in strOrObject && (config.c = strOrObject.cl);
-    'color' in strOrObject && (config.c = strOrObject.color);
+    if ('c' in strOrObject) config.c = strOrObject.c;
+    if ('cl' in strOrObject) config.c = strOrObject.cl;
+    if ('color' in strOrObject) config.c = strOrObject.color;
 
-    'b' in strOrObject && (config.b = strOrObject.b);
-    'bg' in strOrObject && (config.b = strOrObject.bg);
-    'background' in strOrObject && (config.b = strOrObject.background);
+    if ('b' in strOrObject) config.b = strOrObject.b;
+    if ('bg' in strOrObject) config.b = strOrObject.bg;
+    if ('background' in strOrObject) config.b = strOrObject.background;
   } else {
     config.s = String(strOrObject);
     config.c = color;
