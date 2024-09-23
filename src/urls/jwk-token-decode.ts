@@ -8,8 +8,7 @@ export function jwkTokenDecode(token: string): string {
 
   const fnAtob = global.atob === undefined ? atob : global.atob;
 
-  let jwtToken = token;
-  jwtToken.includes('.') && (jwtToken = jwtToken.split('.')[1]);
+  const jwtToken = token.includes('.') ? token.split('.')[1] : token;
 
   try {
     return decodeURIComponent(

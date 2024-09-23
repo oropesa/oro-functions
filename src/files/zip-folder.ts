@@ -40,7 +40,9 @@ export async function zipFolder(folderPath: string, zipPath?: string): Promise<Z
   await fsExtra.remove(zipFile);
 
   if (await pathIsFolder(folderDirectory)) {
-    folderDirectory.slice(-1) !== '/' && (folderDirectory += '/');
+    if (folderDirectory.slice(-1) !== '/') {
+      folderDirectory += '/';
+    }
 
     if (zipFile.includes(folderDirectory)) {
       return setResponseKO('zipFolder Error: Source and target folder must be different.', {

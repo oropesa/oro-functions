@@ -11,7 +11,6 @@ export function runServer(port: number): Promise<Server | undefined> {
     });
 
     server.on('error', () => {
-      // eslint-disable-next-line unicorn/no-useless-undefined
       resolve(undefined);
     });
   });

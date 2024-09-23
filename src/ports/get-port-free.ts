@@ -37,7 +37,9 @@ export async function getPortFree(
       return setResponseKO(`param:portStart must be a number when portEnd is enabled. portStart: ${portStart}`);
     }
 
-    start > end && ([start, end] = [end, start]);
+    if (start > end) {
+      [start, end] = [end, start];
+    }
 
     opts.random = false;
     opts.port = start;
