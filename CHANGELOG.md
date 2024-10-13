@@ -1,4 +1,17 @@
-## 2.3.2 / 2024-07-23
+## 2.3.3 / 2024-10-13
+- Updated libs:
+  - `oro-functions-client` from `v2.3.2` to `v2.3.3`.
+- Updated _dev_ libs:
+  - `@babel/core` from `v7.25.2` to `v7.25.8`.
+  - `@babel/preset-env` from `v7.25.4` to `v7.25.8`.
+  - `@babel/preset-typescript` from `v7.24.7` to `v7.25.7`.
+  - `@eslint/js` from `v9.11.0` to `v9.12.0`.
+  - `eslint` from `v9.11.0` to `v9.12.0`.
+  - `eslint-plugin-unicorn` from `v55.0.0` to `v56.0.0`.
+  - `globals` from `v15.9.0` to `v15.11.0`.
+  - `typescript-eslint` from `v8.7.0` to `v8.8.1`.
+
+## 2.3.2 / 2024-09-23
 
 - Apply `prettier --write` in the whole project (with `endOfLine: 'lf'`).
 - Fix eslint `@typescript-eslint/no-unused-expressions` rule in code.
