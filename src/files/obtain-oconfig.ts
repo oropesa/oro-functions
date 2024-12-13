@@ -52,6 +52,7 @@ export async function obtainOConfig<T extends Record<string, any> = OConfigDefau
   } = args;
 
   const filename = getFilenameByPath(file);
+  // eslint-disable-next-line unicorn/prefer-module
   const filepath = filename === file ? getFolderByPath(getFolderByPath(__dirname)) : getFolderByPath(file);
   const params = arrayGetUnique([
     ...(isArray(defaultParams) ? defaultParams : []),
@@ -86,6 +87,7 @@ export function obtainOConfigSync<T extends Record<string, any> = OConfigDefault
   } = args;
 
   const filename = getFilenameByPath(file);
+  // eslint-disable-next-line unicorn/prefer-module
   const filepath = filename === file ? getFolderByPath(getFolderByPath(__dirname)) : getFolderByPath(file);
   const params = arrayGetUnique([
     ...(isArray(defaultParams) ? defaultParams : []),

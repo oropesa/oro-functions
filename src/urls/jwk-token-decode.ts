@@ -6,6 +6,7 @@ export function jwkTokenDecode(token: string): string {
     return '';
   }
 
+  // eslint-disable-next-line unicorn/prefer-global-this
   const fnAtob = global.atob === undefined ? atob : global.atob;
 
   const jwtToken = token.includes('.') ? token.split('.')[1] : token;

@@ -64,6 +64,7 @@ describe('fn: processWrite', () => {
   });
 
   test('fn: processWrite( str, color red, bg redlight )', () => {
+    // eslint-disable-next-line unicorn/prefer-string-raw
     expect(processWrite(' ¯\\_(ツ)_/¯ ', 'red', 'redlight')).toBe(
       '\u001B[105m\u001B[91m ¯\\_(ツ)_/¯ \u001B[0m\u001B[0m',
     );
