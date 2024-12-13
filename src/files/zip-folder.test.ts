@@ -3,6 +3,7 @@ import { sanitizePath } from 'oro-functions-client';
 
 import { zipFolder } from './zip-folder';
 
+// eslint-disable-next-line unicorn/prefer-module
 const TEST_PATH = sanitizePath(`${__dirname}/__tests__`);
 
 describe('fn: zipFolder', () => {

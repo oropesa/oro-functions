@@ -1,5 +1,6 @@
 import { pathIsFolder } from './path-is-folder';
 
+// eslint-disable-next-line unicorn/prefer-module
 const TEST_PATH = `${__dirname}/__tests__`;
 
 describe('fn: pathIsFolder', () => {

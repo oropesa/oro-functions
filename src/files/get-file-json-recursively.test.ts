@@ -2,6 +2,7 @@ import { objIsNotEmpty } from 'oro-functions-client';
 
 import { getFileJsonRecursively, getFileJsonRecursivelySync } from './get-file-json-recursively';
 
+// eslint-disable-next-line unicorn/prefer-module
 const TEST_PATH = `${__dirname}/__tests__`;
 
 describe('fn: getFileJsonRecursively', () => {

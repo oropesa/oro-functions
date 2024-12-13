@@ -3,6 +3,7 @@ import { sanitizePath } from 'oro-functions-client';
 import type { OConfigResponse } from './obtain-oconfig';
 import { obtainOConfig, obtainOConfigSync, obtainOroConfig, obtainOroConfigSync } from './obtain-oconfig';
 
+// eslint-disable-next-line unicorn/prefer-module
 const TEST_PATH = `${__dirname}/__tests__`;
 
 describe('fn: obtainOConfig', () => {
