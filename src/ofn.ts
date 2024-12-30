@@ -2,9 +2,18 @@
 import { Ofn as OfnClient } from 'oro-functions-client';
 
 // Commands
-import { execCommand } from './commands';
+import { execCommand, execCommandShell } from './commands';
 // Console
-import { printDone, printError, printInfo, printSuccess, printText, processWrite, processWrites } from './console';
+import {
+  printDone,
+  printError,
+  printInfo,
+  printSuccess,
+  printText,
+  printWarn,
+  processWrite,
+  processWrites,
+} from './console';
 // Crypto
 import { cryptoGenerateKeyPair } from './crypto';
 // Files
@@ -68,9 +77,11 @@ export class Ofn extends OfnClient {
   public static printText = printText;
   public static printInfo = printInfo;
   public static printError = printError;
+  public static printWarn = printWarn;
   public static printSuccess = printSuccess;
   public static printDone = printDone;
 
   // Commands
   public static execCommand = execCommand;
+  public static execCommandShell = execCommandShell;
 }
