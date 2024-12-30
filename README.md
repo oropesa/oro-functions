@@ -23,6 +23,7 @@ Functions could be divided in groups: <br>
 · [Operating System](#operating-system) <br>
 · [Ports](#ports) <br>
 · [Console](#console) <br>
+· [Commands](#commands) <br>
 ⇢ (Client) <br>
 · [General](https://github.com/oropesa/oro-functions-client#general) <br>
 · [Numbers](https://github.com/oropesa/oro-functions-client#numbers) <br>
@@ -110,6 +111,14 @@ type( [ 1, 2, 3 ] ); // -> 'array'
   - [Console](#console)
     - [Ofn.processWrite()](#ofnprocesswrite)
     - [Ofn.processWrites()](#ofnprocesswrites)
+    - [Ofn.printText()](#ofnprinttext)
+    - [Ofn.printInfo()](#ofnprintinfo)
+    - [Ofn.printError()](#ofnprinterror)
+    - [Ofn.printSuccess()](#ofnprintsuccess)
+    - [Ofn.printDone()](#ofnprintdone)
+
+  - [Commands](#commands)
+    - [await Ofn.execCommand()](#await-ofnexeccommand)
 
 <hr>
 
@@ -753,15 +762,15 @@ type ProcessWriteObject =
     | { string?: string, color?: string, background?: string }
 ```
 
+**Example:**
 ```js
 Ofn.processWrite('info', 'blue');
 Ofn.processWrite(' Doing some stuff... ');
-
 Ofn.processWrite({ s: 'Error!', c: 'red', b: 'redlight' });
 Ofn.processWrite('\n');
 ```
 
-- **Example:**
+**Output:**
 
 ![Example Console - Process Write](https://oropensando.com/extrafiles/oro-functions/console-process-write.png)
 
@@ -796,6 +805,7 @@ type ProcessWriteObject =
     | { string?: string, color?: string, background?: string }
 ```
 
+**Example:**
 ```js
 Ofn.processWrites([
   { s: ' info ', c: 'blue', b: 'bluelight' },
@@ -805,6 +815,186 @@ Ofn.processWrites([
 ]);
 ```
 
-- **Example:**
+**Output**
 
 ![Example Console - Process Writes](https://oropensando.com/extrafiles/oro-functions/console-process-writes.png)
+
+<hr>
+
+#### Ofn.printText()
+
+```ts
+Ofn.printText = (
+  msg: string, 
+  { start = '', end = '\n', showDatetime = true }: PrintTextOptions = {}
+) => string;
+
+interface PrintTextOptions {
+  start?: string;
+  end?: string;
+  showDatetime?: boolean;
+}
+```
+
+```js
+Ofn.printText( 'Summary' );
+// -> "[2024-12-30T15:15:15.151Z] Summary\n"
+
+Ofn.printText( 'Summary', { showDatetime: false } );
+// -> "Summary\n"
+```
+
+<hr>
+
+#### Ofn.printInfo()
+
+```ts
+Ofn.printInfo = (
+  msg: string,
+  { start = '', end = '\n', showDatetime = true, showLabel = true }: PrintOptions = {}
+) => string;
+
+interface PrintOptions {
+  start?: string;
+  end?: string;
+  showLabel?: boolean;
+  showDatetime?: boolean;
+}
+```
+
+```js
+Ofn.printInfo( 'Uploading files ...' );
+// -> "[2024-12-30T15:15:15.151Z] {blue}info{/blue} Uploading files ...\n"
+
+Ofn.printInfo( 'Uploading files ...', { showLabel: false } );
+// -> "[2024-12-30T15:15:15.151Z] {blue}Uploading files ...{/blue}\n"
+```
+
+<hr>
+
+#### Ofn.printError()
+
+```ts
+Ofn.printError = (
+  msg: string,
+  { start = '', end = '\n', showDatetime = true, showLabel = true }: PrintOptions = {}
+) => string;
+
+interface PrintOptions {
+  start?: string;
+  end?: string;
+  showLabel?: boolean;
+  showDatetime?: boolean;
+}
+```
+
+```js
+Ofn.printError( 'Network connection fails' );
+// -> "[2024-12-30T15:15:15.151Z] {red}error{/red} Network connection fails\n"
+
+Ofn.printError( 'Network connection fails', { showLabel: false } );
+// -> "[2024-12-30T15:15:15.151Z] {red}Network connection fails{/red}\n"
+
+// For example, you can print "info + error".
+
+Ofn.printInfo( 'Uploading files ...' );
+// uploading-code here...
+Ofn.printError( 'Folder not exist' );
+
+// -> "[2024-12-30T15:15:15.151Z] {blue}info{/blue} Uploading files ...\n"
+// -> "[2024-12-30T15:15:20.201Z] {red}error{/red} Folder not exist\n"
+```
+
+<hr>
+
+#### Ofn.printSuccess()
+
+```ts
+Ofn.printSuccess = (
+  msg: string,
+  { start = '', end = '\n', showDatetime = true, showLabel = true }: PrintOptions = {}
+) => string;
+
+interface PrintOptions {
+  start?: string;
+  end?: string;
+  showLabel?: boolean;
+  showDatetime?: boolean;
+}
+```
+
+```js
+Ofn.printSuccess( 'Files upload correctly' );
+// -> "[2024-12-30T15:15:15.151Z] {green}success{/green} Files upload correctly\n"
+
+Ofn.printSuccess( 'Files upload correctly', { showLabel: false } );
+// -> "[2024-12-30T15:15:15.151Z] {green}Files upload correctly{/green}\n"
+
+// For example, you can print "info + success".
+
+Ofn.printInfo( 'Uploading files ...' );
+// uploading-code here...
+Ofn.printSuccess( '6 files has been uploaded' );
+
+// -> "[2024-12-30T15:15:15.151Z] {blue}info{/blue} Uploading files ...\n"
+// -> "[2024-12-30T15:15:20.201Z] {green}success{/green} 6 files has been uploaded\n"
+```
+
+<hr>
+
+#### Ofn.printDone()
+
+```ts
+Ofn.printDone = (
+  msg: string,
+  { start = '', end = '\n', showDatetime = false, showLabel = false }: PrintOptions = {},
+) => string;
+
+interface PrintOptions {
+  start?: string;
+  end?: string;
+  showLabel?: boolean;
+  showDatetime?: boolean;
+}
+```
+
+```js
+Ofn.printDone();
+// -> "{green}Done{/green}\n"
+
+Ofn.printDone('Ignored');
+// -> "{green}Ignored{/green}\n"
+
+// For example, you can print "info + done" in the same line.
+
+Ofn.printInfo( 'Uploading files ... ', { end: '' } );
+// uploading-code here...
+Ofn.printDone();
+
+// -> "[2024-12-30T15:15:15.151Z] {blue}info{/blue} Uploading files ... {green}Done{/green}\n"
+```
+
+<hr>
+
+### Commands
+
+<hr>
+
+#### await Ofn.execCommand()
+
+```ts
+Ofn.execCommand = ( command: string, inheritShell?: false ) => Promise<string>;
+Ofn.execCommand = ( command: string, inheritShell: true ) => Promise<undefined>;
+```
+
+```js
+await Ofn.execCommand('ls -al');
+// (sync) it returns "Folder list result" string as output and show nothing in shell
+
+await Ofn.execCommand('ls -al', { inheritShell: true });
+// (async) it returns _undefined_ as output and stream command-output directly in shell 
+
+
+```
+
+<hr>
