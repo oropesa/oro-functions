@@ -3,6 +3,8 @@ import { isNully, isString, sanitizePath, setResponseKO, setResponseOK } from 'o
 import type { SResponseKOObject, SResponseOKObject } from 'oro-functions-client';
 import { archiveFile, archiveFolder } from 'zip-lib';
 
+import { pathExists } from './path-exists';
+import { pathIsFile } from './path-is-file';
 import { pathIsFolder } from './path-is-folder';
 
 export interface ZipFolderObject {
@@ -31,7 +33,7 @@ export async function zipFolder(folderPath: string, zipPath?: string): Promise<Z
     return setResponseKO('zipFolder failed, param:zipPath is string required.');
   }
 
-  if (!(await fsExtra.exists(folderDirectory))) {
+  if (!(await pathExists(folderDirectory))) {
     return setResponseKO('zipFolder failed, folderPath not exist.', {
       folderPath: folderDirectory,
     });
@@ -78,7 +80,7 @@ export async function zipFolder(folderPath: string, zipPath?: string): Promise<Z
     }
   }
 
-  return (await fsExtra.exists(zipFile))
+  return (await pathIsFile(zipFile))
     ? setResponseOK({ zipPath: zipFile })
     : setResponseKO('File zip not exists (maybe for permissions issue).', {
         zipPath: zipFile,
