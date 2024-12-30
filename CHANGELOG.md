@@ -1,10 +1,20 @@
+## 2.4.2 / 2024-12-30
+
+- Added _file_ methods:
+  - async `pathExists`.
+  - async `pathIsFile`.
+- Improved _file_ method:
+  - async `pathIsFolder`.
+
 ## 2.4.1 / 2024-12-30
+
 - Added _command_ methods:
   - _async_ `execCommandShell` (the same as `execCommand('...', { inheritShell: true })`).
 - Added _console_ methods:
   - `printWarn`.
 
 ## 2.4.0 / 2024-12-30
+
 - Added _command_ methods:
   - _async_ `execCommand`.
 - Added _console_ methods:
@@ -14,8 +24,8 @@
   - `printSuccess`.
   - `printDone`.
 
-
 ## 2.3.4 / 2024-12-13
+
 - Improve `eslint.config.js`.
 - Added libs:
   - `oro-functions-client` from `v2.3.3` to `v2.3.4`.
@@ -42,6 +52,7 @@
   - `typescript-eslint` from `v8.8.1` to `v8.18.0`.
 
 ## 2.3.3 / 2024-10-13
+
 - Updated libs:
   - `oro-functions-client` from `v2.3.2` to `v2.3.3`.
 - Updated _dev_ libs:

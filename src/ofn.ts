@@ -26,6 +26,8 @@ import {
   obtainOConfigSync,
   obtainOroConfig,
   obtainOroConfigSync,
+  pathExists,
+  pathIsFile,
   pathIsFolder,
   zipFolder,
 } from './files';
@@ -54,6 +56,8 @@ export class Ofn extends OfnClient {
   public static getFileJsonRecursivelySync = getFileJsonRecursivelySync;
   public static globFiles = globFiles;
   public static folderIsEmpty = folderIsEmpty;
+  public static pathExists = pathExists;
+  public static pathIsFile = pathIsFile;
   public static pathIsFolder = pathIsFolder;
   public static zipFolder = zipFolder;
 

@@ -92,6 +92,8 @@ type( [ 1, 2, 3 ] ); // -> 'array'
     - [Ofn.getFileJsonRecursivelySync()](#ofngetfilejsonrecursivelysync)
     - [await Ofn.globFiles()](#await-ofnglobfiles)
     - [await Ofn.folderIsEmpty()](#await-ofnfolderisempty)
+    - [await Ofn.pathExists()](#await-ofnpathexists)
+    - [await Ofn.pathIsFile()](#await-ofnpathisfile)
     - [await Ofn.pathIsFolder()](#await-ofnpathisfolder)
     - [await Ofn.zipFolder()](#await-ofnzipfolder)
 
@@ -511,6 +513,32 @@ globArgs = {
 
 <hr>
 
+#### await Ofn.pathExists()
+
+```ts
+await Ofn.pathExists = ( path: string ) => Promise<boolean>;
+```
+
+```js
+await Ofn.pathExists(`/folder/file`);
+// -> true
+```
+
+<hr>
+
+#### await Ofn.pathIsFile()
+
+```ts
+await Ofn.pathIsFile = ( filePath: string ) => Promise<boolean>;
+```
+
+```js
+await Ofn.pathIsFile(`/folder/file`);
+// -> true
+```
+
+<hr>
+
 #### await Ofn.pathIsFolder()
 
 ```ts
@@ -518,7 +546,7 @@ await Ofn.pathIsFolder = ( folderPath: string ) => Promise<boolean>;
 ```
 
 ```js
-await Ofn.pathIsFolder(`folder`);
+await Ofn.pathIsFolder(`/folder`);
 // -> true
 ```
 
