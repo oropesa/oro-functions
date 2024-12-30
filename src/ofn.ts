@@ -1,8 +1,10 @@
-// Console
 // OfnClient
 import { Ofn as OfnClient } from 'oro-functions-client';
 
-import { processWrite, processWrites } from './console/';
+// Commands
+import { execCommand } from './commands';
+// Console
+import { printDone, printError, printInfo, printSuccess, printText, processWrite, processWrites } from './console';
 // Crypto
 import { cryptoGenerateKeyPair } from './crypto';
 // Files
@@ -19,9 +21,9 @@ import {
   zipFolder,
 } from './files';
 // Operating System
-import { osIsAndroid, osIsLinux, osIsMac, osIsWindows, osPlatform } from './platforms/';
+import { osIsAndroid, osIsLinux, osIsMac, osIsWindows, osPlatform } from './platforms';
 // Ports
-import { getPortFree, isPortAvailable, isPortFree } from './ports/';
+import { getPortFree, isPortAvailable, isPortFree } from './ports';
 // Urls
 import { jwkTokenDecode } from './urls';
 
@@ -63,4 +65,12 @@ export class Ofn extends OfnClient {
   // Console
   public static processWrite = processWrite;
   public static processWrites = processWrites;
+  public static printText = printText;
+  public static printInfo = printInfo;
+  public static printError = printError;
+  public static printSuccess = printSuccess;
+  public static printDone = printDone;
+
+  // Commands
+  public static execCommand = execCommand;
 }

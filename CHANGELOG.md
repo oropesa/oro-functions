@@ -1,3 +1,14 @@
+## 2.4.0 / 2024-12-28
+- Added _command_ methods:
+  - _async_ `execCommand`.
+- Added _console_ methods:
+  - `printText`.
+  - `printInfo`.
+  - `printError`.
+  - `printSuccess`.
+  - `printDone`.
+
+
 ## 2.3.4 / 2024-12-13
 - Improve `eslint.config.js`.
 - Added libs:
