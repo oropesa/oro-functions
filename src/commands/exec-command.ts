@@ -1,9 +1,23 @@
 import { spawn } from 'node:child_process';
 import { isString } from 'oro-functions-client';
 
-export function execCommand(command: string, inheritShell?: false): Promise<string>;
-export function execCommand(command: string, inheritShell: true): Promise<undefined>;
-export function execCommand(command: string, inheritShell = false): Promise<string | undefined> {
+export interface execCommandOptions {
+  inheritShell?: boolean;
+}
+
+interface execCommandNoShellOptions {
+  inheritShell?: false;
+}
+
+interface execCommandShellOptions {
+  inheritShell: true;
+}
+
+export function execCommand(command: string, options?: execCommandNoShellOptions): Promise<string>;
+export function execCommand(command: string, options: execCommandShellOptions): Promise<undefined>;
+export function execCommand(command: string, options: execCommandOptions = {}): Promise<string | undefined> {
+  const inheritShell = options?.inheritShell ?? false;
+
   return new Promise((resolve, reject) => {
     if (!command || !isString(command)) {
       reject(new Error('ExecCommand failed: command is string required.'));
@@ -30,4 +44,8 @@ export function execCommand(command: string, inheritShell = false): Promise<stri
         : reject(new Error(`ExecCommand failed with exit code ${code}. \r\nExecCommand: "${command}"`));
     });
   });
+}
+
+export function execCommandShell(command: string): Promise<undefined> {
+  return execCommand(command, { inheritShell: true });
 }

@@ -113,12 +113,14 @@ type( [ 1, 2, 3 ] ); // -> 'array'
     - [Ofn.processWrites()](#ofnprocesswrites)
     - [Ofn.printText()](#ofnprinttext)
     - [Ofn.printInfo()](#ofnprintinfo)
+    - [Ofn.printWarn()](#ofnprintwarn)
     - [Ofn.printError()](#ofnprinterror)
     - [Ofn.printSuccess()](#ofnprintsuccess)
     - [Ofn.printDone()](#ofnprintdone)
 
   - [Commands](#commands)
     - [await Ofn.execCommand()](#await-ofnexeccommand)
+    - [await Ofn.execCommandShell()](#await-ofnexeccommandshell)
 
 <hr>
 
@@ -872,6 +874,41 @@ Ofn.printInfo( 'Uploading files ...', { showLabel: false } );
 
 <hr>
 
+#### Ofn.printWarn()
+
+```ts
+Ofn.printInfo = (
+  msg: string,
+  { start = '', end = '\n', showDatetime = true, showLabel = true }: PrintOptions = {}
+) => string;
+
+interface PrintOptions {
+  start?: string;
+  end?: string;
+  showLabel?: boolean;
+  showDatetime?: boolean;
+}
+```
+
+```js
+Ofn.printWarn( 'There is no files' );
+// -> "[2024-12-30T15:15:15.151Z] {yellow}warn{/yellow} There is no files\n"
+
+Ofn.printWarn( 'There is no files', { showLabel: false } );
+// -> "[2024-12-30T15:15:15.151Z] {yellow}There is no files{/yellow}\n"
+
+// For example, you can print "info + warn".
+
+Ofn.printInfo( 'Uploading files ...' );
+// uploading-code here...
+Ofn.printWarn( 'There is no files' );
+
+// -> "[2024-12-30T15:15:15.151Z] {blue}info{/blue} Uploading files ...\n"
+// -> "[2024-12-30T15:15:20.201Z] {yellow}warn{/yellow} There is no files\n"
+```
+
+<hr>
+
 #### Ofn.printError()
 
 ```ts
@@ -983,8 +1020,12 @@ Ofn.printDone();
 #### await Ofn.execCommand()
 
 ```ts
-Ofn.execCommand = ( command: string, inheritShell?: false ) => Promise<string>;
-Ofn.execCommand = ( command: string, inheritShell: true ) => Promise<undefined>;
+Ofn.execCommand = ( command: string, { inheritShell = false }?: execCommandOptions ) => Promise<string>;
+Ofn.execCommand = ( command: string, { inheritShell = true }: execCommandOptions ) => Promise<undefined>;
+
+interface execCommandOptions {
+  inheritShell?: boolean;
+}
 ```
 
 ```js
@@ -992,6 +1033,23 @@ await Ofn.execCommand('ls -al');
 // (sync) it returns "Folder list result" string as output and show nothing in shell
 
 await Ofn.execCommand('ls -al', { inheritShell: true });
+// (async) it returns _undefined_ as output and stream command-output directly in shell 
+
+
+```
+
+<hr>
+
+#### await Ofn.execCommandShell()
+
+```ts
+Ofn.execCommandShell = ( command: string ) => Promise<undefined>;
+
+// It's the same as `Ofn.execCommand('...', { inheritShell: true })`
+```
+
+```js
+await Ofn.execCommandShell('ls -al');
 // (async) it returns _undefined_ as output and stream command-output directly in shell 
 
 

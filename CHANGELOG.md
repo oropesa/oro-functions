@@ -1,4 +1,10 @@
-## 2.4.0 / 2024-12-28
+## 2.4.1 / 2024-12-30
+- Added _command_ methods:
+  - _async_ `execCommandShell` (the same as `execCommand('...', { inheritShell: true })`).
+- Added _console_ methods:
+  - `printWarn`.
+
+## 2.4.0 / 2024-12-30
 - Added _command_ methods:
   - _async_ `execCommand`.
 - Added _console_ methods:

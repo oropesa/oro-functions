@@ -1,6 +1,6 @@
 {
   "name": "oro-functions",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "The Class Ofn extends Ofn-client and includes additional static helper functions for: URLs, Files, Operating System.",
   "type": "module",
   "main": "./dist/index.cjs",
