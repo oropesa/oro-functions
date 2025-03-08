@@ -1,3 +1,27 @@
+## 2.4.3 / 2025-03-08
+- Reset `package-lock.json`.
+- Enhance `tsconfig.json`.
+- Enhance _package_ `clean` and `build` scripts.
+- Update libs:
+  - `fast-glob` from `v3.3.2` to `v3.3.3`.
+  - `fs-extra` from `v11.2.0` to `v11.3.0`.
+  - `oro-functions-client` from `v2.3.4` to `v2.3.5`.
+- Update _dev_ libs:
+  - `@babel/core` from `v7.26.0` to `v7.26.9`.
+  - `@babel/preset-env` from `v7.26.0` to `v7.26.9`.
+  - `@eslint/js` from `v9.17.0` to `v9.22.0`.
+  - `@trivago/prettier-plugin-sort-imports` from `v5.2.0` to `v5.2.2`.
+  - `eslint` from `v9.16.0` to `v9.22.0`.
+  - `eslint-config-prettier` from `v9.1.0` to `v10.1.1`.
+  - `eslint-plugin-jest` from `v28.9.0` to `v28.11.0`.
+  - `eslint-plugin-prettier` from `v5.2.1` to `v5.2.3`.
+  - `eslint-plugin-unicorn` from `v56.0.1` to `v57.0.0`.
+  - `globals` from `v15.13.0` to `v16.0.0`.
+  - `prettier` from `v3.4.2` to `v3.5.3`.
+  - `tsup` from `v8.3.5` to `v8.4.0`.
+  - `typescript` from `v5.7.2` to `v5.8.2`.
+  - `typescript-eslint` from `v8.18.0` to `v8.26.0`.
+
 ## 2.4.2 / 2024-12-30
 
 - Added _file_ methods:
