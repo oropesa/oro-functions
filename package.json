@@ -40,7 +40,7 @@
     "fs-extra": "^11.3.0",
     "get-port-please": "^3.1.2",
     "oro-functions-client": "^2.3.5",
-    "zip-lib": "^1.0.5"
+    "zip-lib": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.9",
