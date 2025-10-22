@@ -18,7 +18,6 @@ export async function getFileJsonRecursively<T extends Record<string | number, a
 
   let deep = isNumeric(parentDeep) ? parentDeep : 0;
   const filename = getFilenameByPath(filenameOrPath);
-  // eslint-disable-next-line unicorn/prefer-module
   let folder = filenameOrPath === filename ? __filename : filenameOrPath;
   let jsonOutput: T = {} as unknown as T;
 
@@ -55,7 +54,6 @@ export function getFileJsonRecursivelySync<T extends Record<string | number, any
     deep += 2;
   }
 
-  // eslint-disable-next-line unicorn/prefer-module
   let folder = filenameOrPath === filename ? __filename : filenameOrPath;
   let jsonOutput = {} as unknown as T;
 

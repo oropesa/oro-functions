@@ -10,6 +10,8 @@ import {
 
 const allowList = [
   'fn',
+  'dev',
+  'Dev',
   'tmp',
   'msg',
   'obj',
