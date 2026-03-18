@@ -16,12 +16,12 @@ describe('fn: printError', () => {
   test('fn: printError( str )', () => {
     const datetime = new Date().toISOString();
 
-    const outputDatetime = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)`);
+    const outputDatetime = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)`);
     const outputLabel = '\u001B[91merror \u001B[0m';
     const outputMessage = 'An error happened ...';
     const outputSuffix = '\n';
 
-    const output = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)error (.*)An error happened \\.\\.\\.`);
+    const output = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)error (.*)An error happened \.\.\.`);
 
     expect(printError('An error happened ...')).toMatch(output);
     expect(mockProcessWrite).toHaveBeenNthCalledWith(1, expect.stringMatching(outputDatetime));
@@ -34,13 +34,13 @@ describe('fn: printError', () => {
     const datetime = new Date().toISOString();
 
     const outputPrefix = 'PREFIX ';
-    const outputDatetime = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)`);
+    const outputDatetime = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)`);
     const outputLabel = '\u001B[91merror \u001B[0m';
     const outputMessage = 'An error happened ...';
     const outputSuffix = ' SUFFIX';
 
     const output = new RegExp(
-      `PREFIX (.*)\\[${datetime.slice(0, 19)}.....\\] (.*)error (.*)An error happened \\.\\.\\. SUFFIX`,
+      String.raw`PREFIX (.*)\[${datetime.slice(0, 19)}.....\] (.*)error (.*)An error happened \.\.\. SUFFIX`,
     );
 
     expect(printError('An error happened ...', { start: 'PREFIX ', end: ' SUFFIX' })).toMatch(output);

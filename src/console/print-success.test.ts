@@ -17,12 +17,12 @@ describe('fn: printSuccess & printDone', () => {
     test('fn: printSuccess( str )', () => {
       const datetime = new Date().toISOString();
 
-      const outputDatetime = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)`);
+      const outputDatetime = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)`);
       const outputLabel = '\u001B[92msuccess \u001B[0m';
       const outputMessage = 'CSV imported';
       const outputSuffix = '\n';
 
-      const output = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)success (.*)CSV imported`);
+      const output = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)success (.*)CSV imported`);
 
       expect(printSuccess('CSV imported')).toMatch(output);
       expect(mockProcessWrite).toHaveBeenNthCalledWith(1, expect.stringMatching(outputDatetime));
@@ -35,12 +35,14 @@ describe('fn: printSuccess & printDone', () => {
       const datetime = new Date().toISOString();
 
       const outputPrefix = 'PREFIX ';
-      const outputDatetime = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)`);
+      const outputDatetime = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)`);
       const outputLabel = '\u001B[92msuccess \u001B[0m';
       const outputMessage = 'CSV imported';
       const outputSuffix = ' SUFFIX';
 
-      const output = new RegExp(`PREFIX (.*)\\[${datetime.slice(0, 19)}.....\\] (.*)success (.*)CSV imported SUFFIX`);
+      const output = new RegExp(
+        String.raw`PREFIX (.*)\[${datetime.slice(0, 19)}.....\] (.*)success (.*)CSV imported SUFFIX`,
+      );
 
       expect(printSuccess('CSV imported', { start: 'PREFIX ', end: ' SUFFIX' })).toMatch(output);
       expect(mockProcessWrite).toHaveBeenNthCalledWith(1, outputPrefix);
@@ -93,12 +95,12 @@ describe('fn: printSuccess & printDone', () => {
     test('fn: printDone( str, { with-datetime, with-label } )', () => {
       const datetime = new Date().toISOString();
 
-      const outputDatetime = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)`);
+      const outputDatetime = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)`);
       const outputLabel = '\u001B[92msuccess \u001B[0m';
       const outputMessage = 'CSV imported';
       const outputSuffix = '\n';
 
-      const output = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)success (.*)CSV imported`);
+      const output = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)success (.*)CSV imported`);
 
       expect(printDone('CSV imported', { showDatetime: true, showLabel: true })).toMatch(output);
       expect(mockProcessWrite).toHaveBeenNthCalledWith(1, expect.stringMatching(outputDatetime));

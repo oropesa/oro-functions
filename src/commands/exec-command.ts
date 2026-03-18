@@ -26,8 +26,7 @@ export function execCommand(command: string, options: execCommandOptions = {}): 
 
     let output = '';
 
-    const [instruction, ...args] = command.trim().split(' ');
-    const child = spawn(instruction, args, { shell: true, stdio: inheritShell ? 'inherit' : undefined });
+    const child = spawn(command, { shell: true, stdio: inheritShell ? 'inherit' : undefined });
 
     child.stdout?.on('data', (data) => {
       output += `${data}`;
