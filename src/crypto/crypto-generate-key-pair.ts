@@ -52,10 +52,12 @@ export async function cryptoGenerateKeyPair(
         modulusLength: data.modulusLength,
         publicKeyEncoding: {
           type: data.publicKeyEncodingType,
+          // @ts-expect-error TODO fix strict type (instead 'string`)
           format: data.publicKeyEncodingFormat,
         },
         privateKeyEncoding: {
           type: data.privateKeyEncodingType,
+          // @ts-expect-error TODO fix strict type (instead 'string`)
           format: data.privateKeyEncodingFormat,
           cipher: data.privateKeyEncodingCipher,
           passphrase,

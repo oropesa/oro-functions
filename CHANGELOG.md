@@ -1,3 +1,31 @@
+## 2.4.6 / 2026-03-18
+
+- Update GitHub `npm publish` using _Trusted Publisher_.
+- Update GitHub `actions/-@version` and run `coverage` (instead of `test`).
+- Update _tsconfig_ wit `"module": "ESNext"` (instead of `"commonjs"`).
+- Add eslint _utils_ `setEslintLanguageOptionsProject` and `setEslintLanguageOptionsRootAsNode`.
+- Update libs:
+  - `fs-extra` from `v11.3.2` to `v11.3.4`.
+  - `oro-functions-client` from `v2.3.6` to `v2.3.7`.
+  - `zip-lib` from `v1.1.2` to `v1.2.2`.
+- Update _dev_ libs:
+  - `@babel/core` from `v7.28.4` to `v7.29.0`.
+  - `@babel/preset-env` from `v7.28.3` to `v7.29.2`.
+  - `@babel/preset-typescript` from `v7.27.1` to `v7.28.5`.
+  - `@eslint/js` from `v9.38.0` to `v9.39.4`.
+  - `@trivago/prettier-plugin-sort-imports` from `v5.2.2` to `v6.0.2`.
+  - `babel-jest` from `v30.2.0` to `v30.3.0`.
+  - `eslint` from `v9.38.0` to `v9.39.4`.
+  - `eslint-plugin-jest` from `v29.0.1` to `v29.15.0`.
+  - `eslint-plugin-prettier` from `v5.5.4` to `v5.5.5`.
+  - `eslint-plugin-unicorn` from `v61.0.2` to `v63.0.0`.
+  - `globals` from `v16.4.0` to `v17.4.0`.
+  - `jest` from `v30.2.0` to `v30.3.0`.
+  - `nodemon` from `v3.1.10` to `v3.1.14`.
+  - `prettier` from `v3.6.2` to `v3.8.1`.
+  - `tsup` from `v8.5.0` to `v8.5.1`.
+  - `typescript-eslint` from `v8.46.2` to `v8.57.1`.
+
 ## 2.4.5 / 2025-10-28
 
 - Improve `processWrite` _fn_:
@@ -9,7 +37,7 @@
 ## 2.4.4 / 2025-10-21
 
 - Add `update-deps.js` script.
-- Update _github-workflows_ with `actions/checkout@v5` and `node-version: 22`.
+- Update _github-workflows_ with `actions/checkout@v6` and `node-version: 22`.
 - Update libs:
   - `fs-extra` from `v11.3.0` to `v11.3.2`.
   - `get-port-please` from `v3.1.2` to `v3.2.0`.

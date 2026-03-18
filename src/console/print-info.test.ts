@@ -16,12 +16,12 @@ describe('fn: printInfo', () => {
   test('fn: printInfo( str )', () => {
     const datetime = new Date().toISOString();
 
-    const outputDatetime = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)`);
+    const outputDatetime = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)`);
     const outputLabel = '\u001B[96minfo \u001B[0m';
     const outputMessage = 'Importing ...';
     const outputSuffix = '\n';
 
-    const output = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)info (.*)Importing \\.\\.\\.`);
+    const output = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)info (.*)Importing \.\.\.`);
 
     expect(printInfo('Importing ...')).toMatch(output);
     expect(mockProcessWrite).toHaveBeenNthCalledWith(1, expect.stringMatching(outputDatetime));
@@ -34,12 +34,14 @@ describe('fn: printInfo', () => {
     const datetime = new Date().toISOString();
 
     const outputPrefix = 'PREFIX ';
-    const outputDatetime = new RegExp(`(.*)\\[${datetime.slice(0, 19)}.....\\] (.*)`);
+    const outputDatetime = new RegExp(String.raw`(.*)\[${datetime.slice(0, 19)}.....\] (.*)`);
     const outputLabel = '\u001B[96minfo \u001B[0m';
     const outputMessage = 'Importing ...';
     const outputSuffix = ' SUFFIX';
 
-    const output = new RegExp(`PREFIX (.*)\\[${datetime.slice(0, 19)}.....\\] (.*)info (.*)Importing \\.\\.\\. SUFFIX`);
+    const output = new RegExp(
+      String.raw`PREFIX (.*)\[${datetime.slice(0, 19)}.....\] (.*)info (.*)Importing \.\.\. SUFFIX`,
+    );
 
     expect(printInfo('Importing ...', { start: 'PREFIX ', end: ' SUFFIX' })).toMatch(output);
     expect(mockProcessWrite).toHaveBeenNthCalledWith(1, outputPrefix);
